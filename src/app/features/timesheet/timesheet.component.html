@@ -1,0 +1,91 @@
+<div class="invoice-box-header">
+  <button (click)="print()" mat-raised-button>SUBMIT</button>
+  <button (click)="print()" mat-raised-button class="nextbutton">GENERATE PDF</button>
+  <button (click)="print()" mat-raised-button class="nextbutton">PREVIEW</button>
+  <button (click)="print()" mat-raised-button class="nextbutton">SEND FOR APPROVAL</button>
+  <button (click)="print()" mat-raised-button class="nextbutton">VIEW OLD TIMESHEET</button>
+</div>
+<div class="invoice-box" id="html2Pdf" #html2Pdf>
+
+  <table cellpadding="0" cellspacing="0">
+    <tr class="top">
+      <td colspan="7">
+        <table>
+          <tr>
+            <td class="title" colspan="5">
+              <img src="../../../assets/blueverse_logo.png" style="width: 100%; max-width: 100px" />
+            </td>
+
+            <td colspan="2">
+              Year: <select><option>2022</option></select><br />
+              Month : <select><option>January</option></select><br />
+              Week: <select><option>13/10/2022 to 5/10/2022</option></select><br />
+              Today Date: {{today | date:'longDate'}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="heading">
+      <td colspan="6">Employee</td>
+
+      <td>Timesheet Duration</td>
+    </tr>
+
+    <tr class="details">
+      <td colspan="6">Yogesh Rajput</td>
+
+      <td>13/10/2022 to 5/10/2022</td>
+    </tr>
+    <tr>
+      <td colspan="7">
+        <table>
+          <tr class="heading">
+            <td>01/10/2022</td>
+            <td style="text-align: left;">02/10/2022</td>
+            <td>03/10/2022</td>
+            <td>04/10/2022</td>
+            <td>05/10/2022</td>
+            <td>06/10/2022</td>
+            <td>07/10/2022</td>
+          </tr>
+          <tr class="heading">
+            <td>Monday</td>
+            <td style="text-align: left;">Tuesday</td>
+            <td>Wednesday</td>
+            <td>Thrusday</td>
+            <td>Friday</td>
+            <td>Saturday</td>
+            <td>Sunday</td>
+          </tr>
+
+          <tr class="item last">
+            <td>8</td>
+            <td style="text-align: left;">8</td>
+            <td>8</td>
+            <td>8</td>
+            <td>8</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+
+          <tr class="item last">
+            <td><input type="text" class="hourInput"></td>
+            <td style="text-align: left;"><input type="text" class="hourInput"></td>
+            <td><input type="text" class="hourInput"></td>
+            <td><input type="text" class="hourInput"></td>
+            <td><input type="text" class="hourInput"></td>
+            <td><input type="text" class="hourInput"></td>
+            <td><input type="text" class="hourInput"></td>
+          </tr>
+
+          <tr class="total">
+            <td colspan="7" style="text-align: right;">Total hours: 50 Hours</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+  </table>
+</div>

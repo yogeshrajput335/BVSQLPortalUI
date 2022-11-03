@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Add Job</h2>
+
+<form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm"></form>
+<div class="form">
+    <mat-form-field color="accent">
+      <input matInput #input class="form-control" placeholder="JobName" [(ngModel)]="data.jobName" name="jobName" required />
+      <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form">
+    <mat-form-field color="accent">
+      <input matInput #input class="form-control" placeholder="Profile" [(ngModel)]="data.profile" name="profile" required />
+      <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form">
+    <mat-form-field color="accent">
+      <input matInput #input class="form-control" placeholder="Description" [(ngModel)]="data.description" name="description" required />
+      <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </div>
+<!-- 
+<mat-dialog-actions>
+    <button mat-raised-button>Apply</button>
+    <button mat-raised-button>Refer</button>
+</mat-dialog-actions> -->
+
+<div mat-dialog-actions>
+    <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Apply</button>
+    <button mat-raised-button  [mat-dialog-close]="1" (click)="onNoClick()" color="warn">Cancel</button>
+  </div>

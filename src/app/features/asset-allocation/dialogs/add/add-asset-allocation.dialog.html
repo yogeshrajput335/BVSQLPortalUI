@@ -1,0 +1,77 @@
+<div class="container">
+  <h3 mat-dialog-title>Allocation a asset</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-label>Asset</mat-label>
+        <mat-select [(ngModel)]="data.assetId" name="assetId"  color="accent" >
+          <mat-option *ngFor="let s of assets" [value]="s.id">
+            {{s.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <!--Contains mat-hint for characters count and has maxLengt set-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-label>Allocate To</mat-label>
+        <mat-select [(ngModel)]="data.allocatedToId" name="allocatedToId"  color="accent" >
+          <mat-option *ngFor="let s of employees" [value]="s.id">
+            {{s.firstName+ ' '+s.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-label>Allocate By</mat-label>
+        <mat-select [(ngModel)]="data.allocatedById" name="allocatedById"  color="accent" >
+          <mat-option *ngFor="let s of employees" [value]="s.id">
+            {{s.firstName+ ' '+s.lastName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent" appearance="fill"  >
+        <mat-label>Choose a allocate date</mat-label>
+        <input matInput [matDatepicker]="allocatedDate" [(ngModel)]="data.allocatedDate" name="allocatedDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="allocatedDate"></mat-datepicker-toggle>
+        <mat-datepicker #allocatedDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent" appearance="fill" >
+        <mat-label>Choose a retun date</mat-label>
+        <input matInput [matDatepicker]="returnDate" [(ngModel)]="data.returnDate" name="returnDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="returnDate"></mat-datepicker-toggle>
+        <mat-datepicker #returnDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="data.status" name="status"  color="accent" >
+          <mat-option *ngFor="let s of statuses" [value]="s">
+            {{s}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
+      <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,45 @@
+<div class="joblist">
+<button mat-raised-button (click)="addJobs()">Add Job</button>
+<button mat-raised-button (click)="showDeletedJobs()" *ngIf="isDeletedJobsShow==false">Show Deleted Jobs</button>
+<button mat-raised-button (click)="getAllJobs()" *ngIf="isDeletedJobsShow==true">Show Open Jobs</button><br>
+
+<div *ngIf="jobs.length==0">
+  No Record Found
+</div>
+<mat-accordion >
+
+  <mat-expansion-panel *ngFor="let job of jobs">
+
+    <mat-expansion-panel-header>
+
+      <mat-panel-title>
+
+        {{job.jobName}}
+
+      </mat-panel-title>
+
+      <mat-panel-description>
+
+        {{job.profile}}
+
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+
+    <p>{{job.description}}</p>
+
+    <div class="example-button-row">
+
+      <button mat-raised-button color="primary" *ngIf="isDeletedJobsShow==false">Apply</button>
+
+      <button mat-raised-button color="accent" style="margin-left: 10px;" *ngIf="isDeletedJobsShow==false">Refer</button>
+      <button mat-raised-button (click)="onDelete(job.id)"color="warn" style="margin-left: 10px;" *ngIf="isDeletedJobsShow==false">Delete</button>
+      <button mat-raised-button (click)="onSetActiveJob(job.id)"color="accent" *ngIf="isDeletedJobsShow==true">Set Active</button>
+    </div>
+
+  </mat-expansion-panel>
+
+
+
+</mat-accordion>
+ </div>

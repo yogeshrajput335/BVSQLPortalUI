@@ -1,0 +1,73 @@
+<div class="mat-elevation-z8">
+
+  <div class="form">
+    <span style="font-size: 20px;margin-left:20px">Asset Type</span>
+    <span class="spacer"></span>
+    <mat-form-field floatPlaceholder="never" color="accent" style="margin-left: 50px;">
+      <input matInput #filter placeholder="Filter asset type">
+    </mat-form-field>
+    <button mat-icon-button (click)="refresh()" style="float: right;">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource!" matSort class="mat-cell">
+    ng update @angular/cli @angular/core
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.description}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip *ngIf="row.status!=='ACTIVE' && row.status!=='INACTIVE'">No Status</mat-chip>
+          <mat-chip *ngIf="row.status=='ACTIVE'" color="primary" selected>Active</mat-chip>
+          <mat-chip  *ngIf="row.status=='INACTIVE'"color="warn" selected>Inactive</mat-chip>
+        </mat-chip-list>
+      </mat-cell>
+    </ng-container>
+
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button  (click)="addNew()" >
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          <!-- <span>Create New User</span> -->
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="primary" (click)="startEdit(i, row.id, row.name, row.description, row.status)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" (click)="deleteItem(i, row.id, row.name)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <div class="no-results" [style.display]="dataSource?.renderedData?.length == 0 ? '' : 'none'">
+    No results
+  </div>
+
+  <mat-paginator #paginator
+                 [length]="dataSource?.filteredData != null ? dataSource?.filteredData!.length :0"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>

@@ -1,0 +1,18 @@
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-header-row, .mat-row {
+  min-height: 20px;
+}
+.mat-cell{
+  font-size: 11px;
+}
+.mat-icon{
+  height:19px !important;
+  width:19px !important;
+  font-size:19px !important;
+}
+

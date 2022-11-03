@@ -1,0 +1,104 @@
+<div class="container mat-elevation-z8">
+
+    <div class="form">
+      <span style="font-size: 20px;margin-left:20px">Project List</span>
+    <span class="spacer"></span>
+  
+  
+      <mat-form-field floatPlaceholder="never" color="accent" style="margin-left: 50px;">
+        <input matInput #filter placeholder="Filter Project">
+      </mat-form-field>
+      <button mat-icon-button (click)="refresh()" style="float: right;">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  
+    <mat-table #table [dataSource]="dataSource!" matSort class="mat-cell">
+      ng update @angular/cli @angular/core
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- ID Column -->
+      <!-- <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+        <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
+      </ng-container> -->
+  
+      <ng-container matColumnDef="projectName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Project Name</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.projectName}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="clientName">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Client</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.clientName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Description</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.description}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="startDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.startDate | date :'longDate'}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="endDate">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
+        <mat-cell *matCellDef="let row" > {{row.endDate!==null?(row.endDate  | date :'longDate'):'--'}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="projectType">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Project Type</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.projectType}}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-chip-list aria-label="Fish selection">
+            <mat-chip *ngIf="row.status!=='NEW' && row.status!=='APPROVED' && row.status!=='REJECTED'">No Status</mat-chip>
+            <mat-chip *ngIf="row.status=='NEW'" color="accent" selected>New</mat-chip>
+            <mat-chip  *ngIf="row.status=='APPROVED'"color="primary" selected>Approved</mat-chip>
+            <mat-chip  *ngIf="row.status=='REJECTED'"color="warn" selected>Rejected</mat-chip>
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
+  
+      <!-- actions -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>
+          <button mat-icon-button (click)="addNew()">
+            <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          </button>
+        </mat-header-cell>
+  
+        <mat-cell *matCellDef="let row; let i=index;">
+          <button mat-icon-button color="primary" (click)="startEdit(i, row.id, row.projectName, row.clientId, row.description, row.startDate, row.endDate, row.projectType, row.status)">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+  
+          <button mat-icon-button color="warn" (click)="deleteItem(i, row.id, row.projectName)">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  
+  
+    <div class="no-results" [style.display]="dataSource?.renderedData?.length == 0 ? '' : 'none'">
+      No results
+    </div>
+  
+    <mat-paginator #paginator
+                   [length]="dataSource?.filteredData != null ? dataSource?.filteredData!.length :0"
+                   [pageIndex]="0"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>
+  

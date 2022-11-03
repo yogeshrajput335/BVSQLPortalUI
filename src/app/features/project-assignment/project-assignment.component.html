@@ -1,0 +1,256 @@
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Project Wise Employee Tree View">
+    <div style="width:100%;display: flex;" >
+        <div style="width:40%" class="container mat-elevation-z8-tree">
+          <mat-card class="mat-elevation-z5">
+            <mat-card-title-group>
+              <mat-card-title>Number of Clients </mat-card-title>
+              <mat-card-subtitle>Status Wise</mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+              <div class="flex-row">
+                <div class="temp">
+                  <span class="big-text">{{summaryData.activeClientCount}}</span>
+                  <span class="small-text">Active Clients</span>
+                </div>
+                <div class="temp">
+                  <span class="big-text">{{summaryData.inactiveClientCount}}</span>
+                  <span class="small-text">Inactive Clients </span>
+                </div>
+                <div class="temp">
+                  <span class="big-text">{{summaryData.totalClientCount}}</span>
+                  <span class="small-text">Total Clients </span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-title-group>
+              <mat-card-title>Number of Projects </mat-card-title>
+              <mat-card-subtitle>Status Wise</mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+              <!-- <ul>
+                <li>
+                  New Projects - {{projectData.newProjectsCount}}
+                </li>
+                <li>
+                  Approved Projects - {{projectData.approvedProjectsCount}}
+                </li>
+                <li>
+                  Rejected Projects - {{projectData.rejectedProjectsCount}}
+                </li>
+                
+              </ul> -->
+              <div class="flex-row">
+                <div class="temp">
+                  <span class="big-text">{{projectData.newProjectsCount}}</span>
+                  <span class="small-text">New Projects</span>
+                </div>
+                <div class="temp">
+                  <span class="big-text">{{projectData.approvedProjectsCount}}</span>
+                  <span class="small-text">Approved Projects</span>
+                </div>
+                <div class="temp">
+                  <span class="big-text">{{projectData.rejectedProjectsCount}}</span>
+                  <span class="small-text">Rejected Projects</span>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-title-group>
+              <mat-card-title>Number of Employees</mat-card-title>
+              <mat-card-subtitle>Status Wise</mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+              <ul>
+                <li>
+                  Active Employees - {{employeeData.activeEmployeeCount}}
+                </li>
+                <li>
+                  In Active Employees - {{employeeData.inactiveEmployeeCount}}
+                </li>
+              </ul>
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-title-group>
+              <mat-card-title>Employee Count</mat-card-title>
+              <mat-card-subtitle>Project Wise</mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+              <ul>
+                <li *ngFor="let e of summaryData.projectEmpCount">
+                  {{e.projectName}} - {{e.employeeCount}}
+                </li>
+              </ul>
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-title-group>
+              <mat-card-title>Employee Count [NOT DONE]</mat-card-title>
+              <mat-card-subtitle>Client Wise</mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+              <ul>
+                <li>
+                  Test - 1
+                </li>
+                <li>
+                  Test - 1
+                </li>
+                <li>
+                  Test - 1
+                </li>
+                <li>
+                  Test - 1
+                </li>
+                <li>
+                  Test - 1
+                </li>
+              </ul>
+            </mat-card-content>
+          </mat-card>
+          <mat-card>
+            <mat-card-title-group>
+              <mat-card-title>Project Count [NOT DONE]</mat-card-title>
+              <mat-card-subtitle>Client Wise</mat-card-subtitle>
+            </mat-card-title-group>
+            <mat-card-content>
+              <ul>
+                <li>
+                  Test - 1
+                </li>
+                <li>
+                  Test - 1
+                </li>
+                <li>
+                  Test - 1
+                </li>
+                <li>
+                  Test - 1
+                </li>
+                <li>
+                  Test - 1
+                </li>
+              </ul>
+            </mat-card-content>
+          </mat-card>
+
+        </div>
+        <div style="width:60%" class="container mat-elevation-z8-tree">
+          <mat-tree [dataSource]="treeDataSource" [treeControl]="treeControl">
+            <!-- This is the tree node template for leaf nodes -->
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+              <!-- use a disabled button to provide padding for tree leaf -->
+              <button mat-icon-button disabled></button>
+              {{node.name}}
+            </mat-tree-node>
+            <!-- This is the tree node template for expandable nodes -->
+            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+              <button mat-icon-button matTreeNodeToggle
+                      [attr.aria-label]="'Toggle ' + node.name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              {{node.name}}
+            </mat-tree-node>
+          </mat-tree>
+        </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Manage Employee">
+
+    <div class="container mat-elevation-z8">
+
+      <div class="form">
+        <span style="font-size: 20px;margin-left:20px">Project Assignment List</span>
+      <span class="spacer"></span>
+
+
+        <mat-form-field floatPlaceholder="never" color="accent" style="margin-left: 50px;">
+          <input matInput #filter placeholder="Filter Project Assignment">
+        </mat-form-field>
+        <button mat-icon-button (click)="refresh()" style="float: right;">
+          <mat-icon>refresh</mat-icon>
+        </button>
+      </div>
+
+      <mat-table #table [dataSource]="dataSource!" matSort class="mat-cell">
+        ng update @angular/cli @angular/core
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- ID Column -->
+        <!-- <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+          <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
+        </ng-container> -->
+
+
+        <ng-container matColumnDef="projectName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Project</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.projectName}}</mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="employeeName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Employee</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.employeeName}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="notes">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Notes</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.notes}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="startDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.startDate | date :'longDate'}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="endDate">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
+          <mat-cell *matCellDef="let row" > {{row.endDate!==null?(row.endDate  | date :'longDate'):'--'}}</mat-cell>
+        </ng-container>
+
+        <!-- actions -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>
+            <button mat-icon-button (click)="addNew()">
+              <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+            </button>
+          </mat-header-cell>
+
+          <mat-cell *matCellDef="let row; let i=index;">
+            <button mat-icon-button color="primary" (click)="startEdit(i, row.id, row.projectId, row.employeeId, row.notes, row.startDate, row.endDate)">
+              <mat-icon aria-label="Edit">edit</mat-icon>
+            </button>
+
+            <button mat-icon-button color="warn" (click)="deleteItem(i, row.id, row.projectId)">
+              <mat-icon aria-label="Delete">delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+
+      <div class="no-results" [style.display]="dataSource?.renderedData?.length == 0 ? '' : 'none'">
+        No results
+      </div>
+
+      <mat-paginator #paginator
+                    [length]="dataSource?.filteredData != null ? dataSource?.filteredData!.length :0"
+                    [pageIndex]="0"
+                    [pageSize]="10"
+                    [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+

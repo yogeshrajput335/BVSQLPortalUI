@@ -1,0 +1,36 @@
+.full-width-table {
+  width: 100%;
+}
+
+.mat-elevation-z8{
+  margin: 10px;
+  height: 394px;
+  overflow: auto;
+}
+::ng-deep.mat-table {
+  height: 280px !important;
+ }
+
+.fill-remaining-space {
+  float: right;
+}
+.mat-chip {
+  font-size: 11px;
+  font-weight: 500;
+}
+.mat-standard-chip {
+min-height: 20px;
+}
+
+.mat-icon-button {
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+}
+.mat-header-row{
+  background-color: rgb(241 243 244);
+}
+.mat-header-cell {
+  color: #505050;
+  font-size: 14px;
+}

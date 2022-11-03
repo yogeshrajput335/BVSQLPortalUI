@@ -1,0 +1,88 @@
+<div class="mat-elevation-z8">
+
+  <div class="form">
+    <span style="font-size: 20px;margin-left:20px">Asset Allocation</span>
+    <span class="spacer"></span>
+    <mat-form-field floatPlaceholder="never" color="accent" style="margin-left: 50px;">
+      <input matInput #filter placeholder="Filter asset allocation">
+    </mat-form-field>
+    <button mat-icon-button (click)="refresh()" style="float: right;">
+      <mat-icon>refresh</mat-icon>
+    </button>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource!" matSort class="mat-cell">
+    ng update @angular/cli @angular/core
+
+    <ng-container matColumnDef="assetName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Asset Name</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.assetName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="allocatedTo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Allocated To</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.allocatedTo}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="allocatedBy">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Allocated By</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.allocatedBy}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="allocatedDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Allocated Date</mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.allocatedDate | date :'longDate'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="returnDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Return Date</mat-header-cell>
+      <mat-cell *matCellDef="let row" > {{row.returnDate!==null?(row.returnDate  | date :'longDate'):'--'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip *ngIf="row.status!=='ALLOCATED' && row.status!=='RETURNED'">No Status</mat-chip>
+          <mat-chip *ngIf="row.status=='ALLOCATED'" color="primary" selected>Allocated</mat-chip>
+          <mat-chip  *ngIf="row.status=='RETURNED'"color="warn" selected>Returned</mat-chip>
+        </mat-chip-list>
+      </mat-cell>
+    </ng-container>
+
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button  (click)="addNew()" >
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+          <!-- <span>Create New User</span> -->
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="primary" (click)="startEdit(i, row.id, row.assetId ,row.allocatedById, row.allocatedToId,(row.allocatedDate!=='0001-01-01T00:00:00' ?row.allocatedDate:null), (row.returnDate!=='0001-01-01T00:00:00' ?row.returnDate:null), row.status)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="warn" (click)="deleteItem(i, row.id, row.assetName, row.allocatedTo)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+
+  <div class="no-results" [style.display]="dataSource?.renderedData?.length == 0 ? '' : 'none'">
+    No results
+  </div>
+
+  <mat-paginator #paginator
+                 [length]="dataSource?.filteredData != null ? dataSource?.filteredData!.length :0"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+</div>
