@@ -53,7 +53,6 @@ export class HolidayDataService {
   }
 
   deleteHoliday (id: number): void {
-    console.log(id);
     this.httpClient.delete('HolidayMaster/DeleteHolidayMaster/'+id).subscribe((data:any) => {
       //this.dataChange.next(data);
     },

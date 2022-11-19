@@ -30,6 +30,11 @@
         <mat-cell *matCellDef="let row"> {{row.clientName}}</mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="termText">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Term</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.termText}}</mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="contactPerson">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Contact Person</mat-header-cell>
         <mat-cell *matCellDef="let row"> {{row.contactPerson}}</mat-cell>
@@ -77,7 +82,17 @@
           <button mat-icon-button color="warn" (click)="deleteItem(i, row.id, row.clientName)">
             <mat-icon aria-label="Delete">delete</mat-icon>
           </button>
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" >
+            <button mat-menu-item (click)="setTerm(i, row.id, row.clientName, row.term)">
+              <mat-icon>dialpad</mat-icon>
+              <span>Set Term</span>
+            </button>
+          </mat-menu>
         </mat-cell>
+
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

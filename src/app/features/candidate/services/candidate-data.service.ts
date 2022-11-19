@@ -54,7 +54,6 @@ export class CandidateDataService {
   }
 
   deleteCandidate (id: number): void {
-    console.log(id);
     this.httpClient.delete('Candidate/DeleteCandidate/'+id).subscribe((data:any) => {
       //this.dataChange.next(data);
     },
@@ -98,7 +97,6 @@ export class CandidateDataService {
   // DELETE METHOD
   deleteItem(id: number): void {
     this.httpClient.delete(this.API_URL + id).subscribe(data => {
-      console.log(data['']);
         this.toasterService.showToaster('Successfully deleted', 3000);
       },
       (err: HttpErrorResponse) => {

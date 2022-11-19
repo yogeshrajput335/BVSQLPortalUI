@@ -6,4 +6,6 @@ export class Client {
   phoneNumber!: string;
   address!: string;
   status!: string;
+  term!: number;
+  termText!: string;
 }

@@ -58,7 +58,6 @@ export class LeaveComponent implements OnInit {
   startEdit(i: number, id: number, employeeId: number, leaveTypeId: number, fromDate: Date,toDate:Date, reason :string, status: string) {
     this.id = id;
     this.index = i;
-    console.log(this.index);
     const dialogRef = this.dialog.open(EditLeaveDialogComponent, {
       data: {id: id, employeeId: employeeId, leaveTypeId: leaveTypeId, fromDate: fromDate, toDate: toDate, reason: reason, status: status}
     });

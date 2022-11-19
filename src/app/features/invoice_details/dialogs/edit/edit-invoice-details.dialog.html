@@ -1,0 +1,91 @@
+<div class="container">
+  <!-- <h3 mat-dialog-title>Issue id: {{data.id}}</h3> -->
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <!--Textarea for demo purposes-->
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput #input class="form-control" placeholder="Invoice Number" [(ngModel)]="data.invoiceNo" name="invoiceNo" required />
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent" appearance="fill"  >
+        <mat-label>Choose  created Date</mat-label>
+        <input matInput [matDatepicker]="createdDate" [(ngModel)]="data.createdDate" name="createdDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="createdDate"></mat-datepicker-toggle>
+        <mat-datepicker #createdDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-label>Terms</mat-label>
+        <mat-select [(ngModel)]="data.term" name="term"  color="accent" >
+          <mat-option *ngFor="let s of terms" [value]="s">
+            {{s}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent" appearance="fill"  >
+        <mat-label>Choose Due Date</mat-label>
+        <input matInput [matDatepicker]="dueDate" [(ngModel)]="data.dueDate" name="dueDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="dueDate"></mat-datepicker-toggle>
+        <mat-datepicker #dueDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-label>client</mat-label>
+        <mat-select [(ngModel)]="data.clientId" name="clientId"  color="accent" >
+          <mat-option *ngFor="let s of  clients" [value]="s.id">
+            {{s.clientName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="From Line 1" [(ngModel)]="data.fromLine1" name="fromLine1">
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="From Line 2" [(ngModel)]="data.fromLine2" name="fromLine2">
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <input matInput placeholder="From Line 3" [(ngModel)]="data.fromLine3" name="fromLine3">
+      </mat-form-field>
+    </div>
+
+    <div class="form">
+      <mat-form-field color="accent">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="data.status" name="status"  color="accent" >
+          <mat-option *ngFor="let s of statuses" [value]="s">
+            {{s}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <div mat-dialog-actions>
+      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
+      <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn">Cancel</button>
+    </div>
+  </form>
+</div>

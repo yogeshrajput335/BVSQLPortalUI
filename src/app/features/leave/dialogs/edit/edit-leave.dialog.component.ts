@@ -17,7 +17,6 @@ export class EditLeaveDialogComponent {
                 this.statuses = this.dataService.getStatues()
                 this.leaveTypes = this.dataService.getLeaveTypes()
                 this.employees = this.dataService.getEmployees()
-                console.log(data)
               }
 
   formControl = new FormControl('', [

@@ -10,7 +10,75 @@
             This is a summary of the content
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <p><span>Name : {{basicInfo.employeeName}}</span> <br/>
+
+          <div class="example-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.employeeName" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Father's Name</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.fatherName" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Mother's Name</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.motherName" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Blood Group</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.motherName" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Personal Email Id</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.personalEmailId" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.dateOfBirth" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Is Married</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.isMarried" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Marital Status</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.maritalStatus" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Spouse Name</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.spouseName" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Permanent Address</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.permanentAddress" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Is Both Address Sames</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.isBothAddressSame" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Current Address</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.currentAddress" readonly="true">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Gender</mat-label>
+              <input matInput placeholder="Placeholder" [value]="basicInfo.gender" readonly="true">
+            </mat-form-field>
+          </div>
+          <!-- <p>
+          <span>Name : {{basicInfo.employeeName}}</span> <br/>
           <span>Father's Name : {{basicInfo.fatherName}}</span> <br/>
           <span>Mother's Name : {{basicInfo.motherName}}</span> <br/>
           <span>Blood Group : {{basicInfo.bloodGroup}}</span> <br/>
@@ -23,7 +91,7 @@
           <span>Is Both Address Same : {{basicInfo.isBothAddressSame}}</span> <br/>
           <span>Current Address : {{basicInfo.currentAddress}}</span> <br/>
           <span>Gender: {{basicInfo.gender}}</span> <br/>
-        </p>
+        </p> -->
       </mat-expansion-panel>
       <mat-expansion-panel>
         <mat-expansion-panel-header>

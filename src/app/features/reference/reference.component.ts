@@ -60,7 +60,6 @@ export class ReferenceComponent implements OnInit {
   startEdit(i: number, id: number, firstname: string, lastname: string, phoneno: number, email: string, status: string) {
     this.id = id;
     this.index = i;
-    console.log(this.index);
     const dialogRef = this.dialog.open(EditReferenceDialogComponent, {
       data: {id: id, firstName: firstname, lastName: lastname, phoneNo: phoneno,email: email, status: status}
     });

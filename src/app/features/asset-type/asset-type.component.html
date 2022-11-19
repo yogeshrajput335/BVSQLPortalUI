@@ -2,13 +2,14 @@
 
   <div class="form">
     <span style="font-size: 20px;margin-left:20px">Asset Type</span>
-    <span class="spacer"></span>
-    <mat-form-field floatPlaceholder="never" color="accent" style="margin-left: 50px;">
+    <!-- <span class="spacer"></span> -->
+    <span class="fill-remaining-space"></span>
+    <mat-form-field floatPlaceholder="never" color="accent" style="margin-left:50px">
       <input matInput #filter placeholder="Filter asset type">
     </mat-form-field>
-    <button mat-icon-button (click)="refresh()" style="float: right;">
+    <!-- <button mat-icon-button (click)="refresh()" style="float: right;">
       <mat-icon>refresh</mat-icon>
-    </button>
+    </button> -->
   </div>
 
   <mat-table #table [dataSource]="dataSource!" matSort class="mat-cell">

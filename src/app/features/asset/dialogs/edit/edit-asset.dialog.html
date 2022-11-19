@@ -1,38 +1,30 @@
-<div class="container">
-  <!-- <h3 mat-dialog-title>Issue id: {{data.id}}</h3> -->
-
+<button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button><div class="container">
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
-    <!--Textarea for demo purposes-->
-    <div class="form">
-      <mat-form-field color="accent">
+    <div class="example-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Asset Name</mat-label>
         <input matInput #input class="form-control" placeholder="Name" [(ngModel)]="data.name" name="name" required />
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div>
 
-    <!--Contains mat-hint for characters count and has maxLengt set-->
-    <div class="form">
-      <mat-form-field color="accent">
+      <mat-form-field appearance="outline">
         <mat-label>Type</mat-label>
-        <mat-select [(ngModel)]="data.typeId" name="type"  color="accent" >
+        <mat-select [(ngModel)]="data.typeId" name="type" color="accent">
           <mat-option *ngFor="let s of assetTypes" [value]="s.id">
             {{s.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent">
+      <mat-form-field appearance="outline">
+        <mat-label>Model Number</mat-label>
         <input matInput placeholder="Model Number" [(ngModel)]="data.modelNumber" name="modelNumber">
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent">
+      <mat-form-field appearance="outline">
         <mat-label>Status</mat-label>
-        <mat-select [(ngModel)]="data.status" name="status"  color="accent" >
+        <mat-select [(ngModel)]="data.status" name="status" color="accent">
           <mat-option *ngFor="let s of statuses" [value]="s">
             {{s}}
           </mat-option>
@@ -42,7 +34,6 @@
 
     <div mat-dialog-actions>
       <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
-      <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn">Cancel</button>
-    </div>
+     </div>
   </form>
 </div>

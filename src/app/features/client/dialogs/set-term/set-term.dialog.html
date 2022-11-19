@@ -1,0 +1,43 @@
+<div class="container">
+  <div mat-dialog-content>
+    Client: {{data.clientName}} <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button>
+    <p></p>
+    <div class="example-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Client</mat-label>
+        <mat-select [(ngModel)]="term" name="term"  color="accent" >
+          <mat-option value="15">15d</mat-option>
+          <mat-option value="30">30d</mat-option>
+          <mat-option value="45">45d</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Reason For Change</mat-label>
+        <textarea matInput #input class="form-control" [(ngModel)]="reasonForChange" name="reasonForChange" ></textarea>
+      </mat-form-field>
+        <button mat-raised-button [mat-dialog-close]="1" (click)="confirm()" class="addBtn" color="primary">Set Term</button>
+      </div>
+  </div>
+  <br>
+  <table id="termTable">
+    <tr>
+    <th>Change Date</th>
+    <th>Old Term</th>
+    <th>New Term</th>
+    <th>Change By</th>
+    <th>Reason For Change</th>
+    </tr>
+    <tr *ngFor="let item of termHistory">
+      <td>{{item.changeDate | date :'longDate'}}</td>
+      <td>{{item.oldTermText}}</td>
+      <td>{{item.newTermText}}</td>
+      <td>{{item.changeBy}}</td>
+      <td>{{item.reasonForChange}}</td>
+    </tr>
+    <tr *ngIf="termHistory.length==0">
+      <td colspan="5">
+        No Term History
+      </td>
+    </tr>
+  </table>
+</div>

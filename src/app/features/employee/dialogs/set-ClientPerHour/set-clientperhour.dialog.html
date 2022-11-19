@@ -1,0 +1,87 @@
+<div class="container">
+  <div mat-dialog-content>
+    Employee: {{data.firstName+ ' '+data.lastName}}
+    <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button>
+    <button mat-raised-button (click)="openAdd=true;" class="cancelBtn1" color="primary" *ngIf="!openAdd">Add</button>
+    <button mat-raised-button (click)="openAdd=false;" class="cancelBtn2" color="accent" *ngIf="openAdd">Show Data</button>
+    <p></p>
+    <div class="example-container" *ngIf="openAdd">
+    <mat-form-field appearance="outline">
+      <mat-label>Client</mat-label>
+      <mat-select [(ngModel)]="client" name="client"  color="accent" >
+        <mat-option *ngFor="let s of clients" [value]="s.id">
+          {{s.clientName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Per Hour</mat-label>
+        <input matInput placeholder="PerHour" [(ngModel)]="perHour" name="perHour">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Reason For Change</mat-label>
+        <textarea matInput #input class="form-control" [(ngModel)]="reasonForChange" name="reasonForChange" ></textarea>
+      </mat-form-field>
+      <br/>
+      <button mat-raised-button (click)="confirm()" class="addBtn" color="primary">Set Client Per Hour</button>
+
+    </div>
+  </div>
+
+  <mat-tab-group mat-align-tabs="center" *ngIf="!openAdd">
+    <mat-tab label="Per Hour Data">
+      <table id="clientPerHourTable">
+        <tr>
+        <th>Client</th>
+        <th>Per Hour</th>
+        </tr>
+        <tr *ngFor="let item of clientPerHourData">
+          <td>{{item.client}}</td>
+          <td>{{item.perHour}}</td>
+        </tr>
+        <tr *ngIf="clientPerHourHistory.length==0">
+          <td colspan="2">
+            No per hour added to any client
+          </td>
+        </tr>
+      </table>
+    </mat-tab>
+    <mat-tab label="Audit History">
+      <mat-form-field appearance="outline">
+        <mat-label>Client</mat-label>
+        <mat-select [(ngModel)]="clientForHistory" name="clientForHistory"  color="accent"  (selectionChange)="onClientChange()">
+          <mat-option value="0">
+            ALL CLIENT
+          </mat-option>
+          <mat-option *ngFor="let s of clients" [value]="s.id">
+            {{s.clientName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <table id="clientPerHourTable">
+        <tr>
+        <th>Client</th>
+        <th>Old Per Hour</th>
+        <th>New Per Hour</th>
+        <th>Reason For Change</th>
+        <th>Change Date</th>
+        <th>Change By</th>
+        </tr>
+        <tr *ngFor="let item of clientPerHourHistory">
+          <td>{{item.client}}</td>
+          <td>{{item.oldPerHour}}</td>
+          <td>{{item.newPerHour}}</td>
+          <td>{{item.reasonForChange}}</td>
+          <td>{{item.changeDate  | date :'longDate'}}</td>
+          <td>{{item.changeBy}}</td>
+        </tr>
+        <tr *ngIf="clientPerHourHistory.length==0">
+          <td colspan="6">
+            No per hour History
+          </td>
+        </tr>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

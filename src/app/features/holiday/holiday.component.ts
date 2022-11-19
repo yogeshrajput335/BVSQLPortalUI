@@ -58,7 +58,6 @@ export class HolidayComponent implements OnInit {
   startEdit(i: number, id: number, holidayName: string, description: string, date: Date, status: string) {
     this.id = id;
     this.index = i;
-    console.log(this.index);
     const dialogRef = this.dialog.open(EditHolidayDialogComponent, {
       data: {id: id, holidayName: holidayName, description: description, date: date, status: status}
     });

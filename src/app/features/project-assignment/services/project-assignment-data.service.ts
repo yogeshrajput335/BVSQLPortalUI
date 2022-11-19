@@ -94,7 +94,6 @@ export class ProjectAssignmentDataService {
   }
 
   deleteProjectAssignment (id: number): void {
-    console.log(id);
     this.httpClient.delete('ProjectAssignment/DeleteProjectAssignment/'+id).subscribe((data:any) => {
       //this.dataChange.next(data);
     },

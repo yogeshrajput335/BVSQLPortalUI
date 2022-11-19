@@ -17,7 +17,6 @@ export class EditProjectDialogComponent {
                 this.statuses = this.dataService.getStatues()
                 this.projectTypes = this.dataService.getProjectTypes()
                 this.clients = this.dataService.getClients()
-                console.log(data)
               }
 
   formControl = new FormControl('', [

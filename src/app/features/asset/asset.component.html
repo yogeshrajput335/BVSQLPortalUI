@@ -35,28 +35,32 @@
         <mat-chip-list aria-label="Fish selection">
           <mat-chip *ngIf="row.status!=='ACTIVE' && row.status!=='INACTIVE'">No Status</mat-chip>
           <mat-chip *ngIf="row.status=='ACTIVE'" color="primary" selected>Active</mat-chip>
-          <mat-chip  *ngIf="row.status=='INACTIVE'"color="warn" selected>Inactive</mat-chip>
+          <mat-chip *ngIf="row.status=='INACTIVE'" color="warn" selected>Inactive</mat-chip>
         </mat-chip-list>
       </mat-cell>
     </ng-container>
 
-    <!-- actions -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button  (click)="addNew()" >
+        <button mat-icon-button (click)="addNew()">
           <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-          <!-- <span>Create New User</span> -->
         </button>
       </mat-header-cell>
 
       <mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button color="primary" (click)="startEdit(i, row.id, row.name, row.typeId, row.modelNumber, row.status)">
-          <mat-icon aria-label="Edit">edit</mat-icon>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
         </button>
 
-        <button mat-icon-button color="warn" (click)="deleteItem(i, row.id, row.name)">
-          <mat-icon aria-label="Delete">delete</mat-icon>
-        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="startEdit(i, row.id, row.name, row.typeId, row.modelNumber, row.status)">
+            <span>Edit</span>
+          </button>
+
+          <button mat-menu-item (click)="deleteItem(i, row.id, row.name)">
+            <span>Delete</span>
+          </button>
+        </mat-menu>
       </mat-cell>
     </ng-container>
 
@@ -69,10 +73,7 @@
     No results
   </div>
 
-  <mat-paginator #paginator
-                 [length]="dataSource?.filteredData != null ? dataSource?.filteredData!.length :0"
-                 [pageIndex]="0"
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 25, 100]">
+  <mat-paginator #paginator [length]="dataSource?.filteredData != null ? dataSource?.filteredData!.length :0"
+    [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
   </mat-paginator>
 </div>

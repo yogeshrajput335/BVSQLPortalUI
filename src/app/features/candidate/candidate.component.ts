@@ -20,7 +20,7 @@ import { CandidateDataSource } from './candidate-datasource';
   styleUrls: ['./candidate.component.scss']
 })
 export class CandidateComponent implements OnInit {
-  displayedColumns = ['firstName', 'lastName', 'phoneNo','email', 'status', 'referByName', 'actions'];
+  displayedColumns = ['firstName', 'lastName', 'jobName', 'phoneNo','email', 'status', 'referByName', 'actions'];
   CandidateDatabase?: CandidateDataService | null;
   dataSource?: CandidateDataSource | null;
   index?: number;
@@ -60,7 +60,6 @@ export class CandidateComponent implements OnInit {
   startEdit(i: number, id: number, firstname: string, lastname: string,  phoneno: number, email: string, status: string) {
     this.id = id;
     this.index = i;
-    console.log(this.index);
     const dialogRef = this.dialog.open(EditCandidateDialogComponent, {
       data: {id: id, firstName: firstname, lastName: lastname, phoneNo: phoneno, email: email,status: status}
     });

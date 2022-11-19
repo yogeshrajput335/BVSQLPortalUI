@@ -108,11 +108,22 @@ import { AddProjectAssignmentDialogComponent } from '../features/project-assignm
 import { JobsDialogComponent } from '../features/jobs/jobs-dialog/jobs-dialog.component';
 import { JobsDataService } from '../features/jobs/jobs-data.service';
 
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+
+
+import { InvoiceDetailsDataService } from '../features/invoice_details/services/invoice-details-data.service';
+import { AddInvoiceDetailsDialogComponent } from '../features/invoice_details/dialogs/add/add-invoice-details.dialog.component';
+import { DeleteInvoiceDetailsDialogComponent } from '../features/invoice_details/dialogs/delete/delete-invoice_details.dialog.component';
+import { EditInvoiceDetailsDialogComponent } from '../features/invoice_details/dialogs/edit/edit-invoice-details.dialog.component';
+import { InvoiceDetailsComponent } from '../features/invoice_details/invoice-details.component';
+import { SetTermClientDialogComponent } from '../features/client/dialogs/set-term/set-term.dialog.component';
+import { InvoiceDialogComponent } from '../features/invoice_details/dialogs/invoice-dialog/invoice-dialog.dialog.component';
+import { SetClientPerHourDialogComponent } from '../features/employee/dialogs/set-ClientPerHour/set-clientperhour.dialog.component';
 
 
 @NgModule({
   declarations: [DashboardComponent, UsersComponent, LeaveTypeComponent ,AdminComponent,NavComponent
-  ,TimesheetComponent,ClientComponent,ReferenceComponent,CandidateComponent,ProjectAssignmentComponent,
+  ,TimesheetComponent,ClientComponent,ReferenceComponent,CandidateComponent,ProjectAssignmentComponent,InvoiceDetailsComponent,
   AddUserDialogComponent,
   AddLeaveTypeDialogComponent,
   AddClientDialogComponent,
@@ -127,7 +138,6 @@ import { JobsDataService } from '../features/jobs/jobs-data.service';
   OrganizationalStructureComponent,
   LeaveComponent,
   HolidayComponent,
-  
 AssetComponent,
   ProjectComponent,
   AssetTypeComponent,
@@ -170,6 +180,12 @@ AssetComponent,
   InvoicesComponent,
   JobsComponent,
   JobsDialogComponent,
+  AddInvoiceDetailsDialogComponent,
+  DeleteInvoiceDetailsDialogComponent,
+  EditInvoiceDetailsDialogComponent,
+  SetTermClientDialogComponent,
+  InvoiceDialogComponent,
+  SetClientPerHourDialogComponent
 ],
   imports: [
     CommonModule,
@@ -200,10 +216,11 @@ AssetComponent,
     MatExpansionModule,
     MatTabsModule,
     MatTreeModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    Ng2GoogleChartsModule
   ],
   providers: [UserDataService,LeaveTypeDataService,ClientDataService,AssetDataService,AssetTypeDataService,
     EmployeeDataService, AssetAllocationDataService, LeaveDataService, HolidayDataService,ReferenceDataService, CandidateDataService,ProjectDataService,
-  ProjectAssignmentDataService, JobsDataService]
+  ProjectAssignmentDataService, JobsDataService, InvoiceDetailsDataService]
 })
 export class AdminModule { }

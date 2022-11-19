@@ -1,0 +1,104 @@
+<div class="container">
+<!-- <div class="container">
+  <h3 mat-dialog-title>Are you sure?</h3>
+  <div mat-dialog-content>
+    Invoice Id: {{data.invoiceId}}
+    <p></p>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-raised-button [mat-dialog-close]="1" (click)="confirmDelete()">Delete</button>
+    <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn">Cancel</button>
+  </div>
+</div> -->
+
+<div class="invoice-box-header">
+  <button (click)="print()" mat-raised-button>GENERATE PDF</button>
+  <button (click)="onNoClick()" mat-raised-button class="nextbutton">Close</button>
+  <!-- <button (click)="email()" mat-raised-button class="nextbutton">PREVIEW</button>
+  <button (click)="email()" mat-raised-button class="nextbutton">SEND FOR APPROVAL</button>
+  <button (click)="email()" mat-raised-button class="nextbutton">VIEW OLD INVOICES</button> -->
+</div>
+<div class="invoice-box" >
+
+  <table cellpadding="0" cellspacing="0" id="html2Pdf" #html2Pdf>
+    <tr class="top">
+      <td colspan="5">
+        <table class="table">
+          <tr>
+            <td class="title" >
+              <img src="../../../assets/blueverse_logo.png" style="width: 100%; max-width: 100px" />
+            </td>
+
+            <td>
+              Invoice #: {{invoice.invoiceNo}}<br />
+              Created: {{invoice.createdDate | date :'longDate'}}<br />
+              Due: {{invoice.dueDate | date :'longDate'}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="information">
+      <td colspan="5">
+        <table class="table">
+          <tr>
+            <td >
+              TO,<br />
+              {{invoice.clientName}}<br />
+              {{invoice.fromLine1}}<br />
+              {{invoice.fromLine2}}<br />
+              {{invoice.fromLine3}}
+            </td>
+
+            <td>
+              FROM,<br />
+              BLUEVERSE SYSTEMS<br />
+              ADD: 13800 Coppermine Rd,<br/>
+              Herndon, VA-20171.<br/>
+              PH: +1 571-278-2125<br />
+              EMAIL: admin@blueversesystems.com
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="heading">
+      <td colspan="2">Term</td>
+      <td colspan="3">Due Date</td>
+    </tr>
+
+    <tr class="details">
+      <td colspan="2">{{invoice.termText}}</td>
+      <td colspan="3">{{invoice.dueDate | date :'longDate'}}</td>
+    </tr>
+
+    <tr class="heading">
+      <td>Product</td>
+      <td>Project</td>
+      <td>Per Hour Cost</td>
+      <td>Total Hours</td>
+      <td>Cost</td>
+    </tr>
+
+    <tr class="item" *ngFor="let item of invoice.products">
+      <td>{{item.employee}}</td>
+      <td>{{item.project}}({{item.projectType}})</td>
+      <td>${{item.perHourCost}}</td>
+      <td>{{item.totalHours}}</td>
+      <td>${{item.totalCost}}</td>
+    </tr>
+
+    <tr class="total">
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td>Total Cost: ${{totalCost}}</td>
+    </tr>
+  </table>
+</div>
+</div>
+

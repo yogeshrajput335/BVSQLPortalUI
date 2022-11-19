@@ -1,0 +1,144 @@
+<button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button>
+<div class="container">
+  <h3 mat-dialog-title>Add new invoice details</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <!--Textarea for demo purposes-->
+    <div class="example-container">
+      <mat-form-field appearance="outline">
+        <input matInput #input class="form-control" placeholder="Invoice Number" [(ngModel)]="data.invoiceNo" name="invoiceNo" required />
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline"  >
+        <mat-label>Choose  created Date</mat-label>
+        <input matInput [matDatepicker]="createdDate" [(ngModel)]="data.createdDate" name="createdDate" (change)="onCreatedDateChange()">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="createdDate"></mat-datepicker-toggle>
+        <mat-datepicker #createdDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>client</mat-label>
+        <mat-select [(ngModel)]="data.clientId" name="clientId"  color="accent" (selectionChange)="onClientChange()">
+          <mat-option *ngFor="let s of  clients" [value]="s.id">
+            {{s.clientName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Terms</mat-label>
+        <input matInput [(ngModel)]="data.termText" name="termText" readonly="readonly">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" >
+        <mat-label>Choose Due Date</mat-label>
+        <input matInput [matDatepicker]="dueDate" [(ngModel)]="data.dueDate" name="dueDate" disabled="disabled">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="dueDate"></mat-datepicker-toggle>
+        <mat-datepicker #dueDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Address Line 1</mat-label>
+        <input matInput [(ngModel)]="data.fromLine1" name="fromLine1">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Address Line 2</mat-label>
+        <input matInput [(ngModel)]="data.fromLine2" name="fromLine2">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Address Line 3</mat-label>
+        <input matInput [(ngModel)]="data.fromLine3" name="fromLine3">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="data.status" name="status"  color="accent" >
+          <mat-option *ngFor="let s of statuses" [value]="s">
+            {{s}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Products <mat-chip color="primary" selected *ngIf="products.length>0">{{products.length}}</mat-chip>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="example-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Product</mat-label>
+            <mat-select [(ngModel)]="product.employeeId" name="employeeId"  color="accent" (selectionChange)="onEmployeeChange()">
+              <mat-option *ngFor="let s of employees" [value]="s.id">
+                {{s.firstName+' '+s.lastName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Hours</mat-label>
+            <input matInput placeholder="Hours" [(ngModel)]="product.totalHours" name="totalHours" (change)="calculateTotalCost()">
+          </mat-form-field>
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Project</mat-label>
+            <mat-select [(ngModel)]="product.projectId" name="projectId"  color="accent" >
+              <mat-option *ngFor="let s of projects" [value]="s.id">
+                {{s.projectName}} ({{s.projectType}})
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Per Hour Cost</mat-label>
+            <input matInput [(ngModel)]="product.perHourCost" name="perHourCost" readonly="readonly" (change)="calculateTotalCost()">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Total Cost</mat-label>
+            <input matInput [(ngModel)]="product.totalCost" name="totalCost" readonly="readonly">
+          </mat-form-field>
+
+          <button mat-raised-button  (click)="AddProduct()">Add Product</button>
+          <mat-divider></mat-divider>
+
+          <table id="productTable">
+            <tr>
+            <th>Product</th>
+            <th>Per Hour Cost</th>
+            <th>Hours</th>
+            <th>Total Cost</th>
+            </tr>
+            <tr *ngFor="let item of products">
+              <td>{{item.employeeName}}</td>
+              <td>{{item.perHourCost}}</td>
+              <td>{{item.totalHours}}</td>
+              <td>{{item.totalCost}}</td>
+            </tr>
+            <tr *ngIf="products.length==0">
+              <td colspan="5">
+                No product Added
+              </td>
+            </tr>
+          </table>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
+    </div>
+  </form>
+</div>

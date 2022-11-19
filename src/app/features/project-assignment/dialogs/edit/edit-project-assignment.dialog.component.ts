@@ -15,7 +15,6 @@ export class EditProjectAssignmentDialogComponent {
               @Inject(MAT_DIALOG_DATA) public data: any, public dataService: ProjectAssignmentDataService) {
                 this.projects = this.dataService.getProjects()
                 this.employees = this.dataService.getEmployees()
-                console.log(data)
               }
 
   formControl = new FormControl('', [

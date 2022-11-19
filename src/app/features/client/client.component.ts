@@ -13,6 +13,7 @@ import {DeleteClientDialogComponent} from './dialogs/delete/delete-client.dialog
 import {BehaviorSubject, fromEvent, merge, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import { ClientDataSource } from './client-datasource';
+import { SetTermClientDialogComponent } from './dialogs/set-term/set-term.dialog.component';
 
 @Component({
   selector: 'app-client',
@@ -20,7 +21,7 @@ import { ClientDataSource } from './client-datasource';
   styleUrls: ['./client.component.scss']
 })
 export class ClientComponent implements OnInit {
-  displayedColumns = ['clientName', 'contactPerson', 'email','phoneNumber','address', 'status', 'actions'];
+  displayedColumns = ['clientName', 'termText','contactPerson', 'email','phoneNumber','address', 'status', 'actions'];
   ClientDatabase?: ClientDataService | null;
   dataSource?: ClientDataSource | null;
   index?: number;
@@ -58,7 +59,6 @@ export class ClientComponent implements OnInit {
   startEdit(i: number, id: number, clientname: string, contactperson: string, email: string, phonenumber: number, address: string, status: string) {
     this.id = id;
     this.index = i;
-    console.log(this.index);
     const dialogRef = this.dialog.open(EditClientDialogComponent, {
       data: {id: id, clientName: clientname, contactPerson: contactperson, email: email, phoneNumber: phonenumber, address: address,status: status}
     });
@@ -84,6 +84,21 @@ export class ClientComponent implements OnInit {
         const foundIndex = this.ClientDatabase!.dataChange.value.findIndex(x => x.id === this.id);
         this.ClientDatabase!.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
+      }
+    });
+  }
+  setTerm(i: number, id: number, clientName: string, term: number) {
+    this.index = i;
+    this.id = id;
+    const dialogRef = this.dialog.open(SetTermClientDialogComponent, {
+      data: {id: id, clientName: clientName, term: term}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        // const foundIndex = this.ClientDatabase!.dataChange.value.findIndex(x => x.id === this.id);
+        // this.ClientDatabase!.dataChange.value.splice(foundIndex, 1);
+        this.loadData();
       }
     });
   }

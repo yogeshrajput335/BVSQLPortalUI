@@ -62,7 +62,6 @@ export class UsersComponent implements OnInit {
     this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
-    console.log(this.index);
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       data: {id: id, username: username, password: password, email: email, userType: userType, status: status}
     });

@@ -62,7 +62,6 @@ export class AssetAllocationComponent implements OnInit {
     this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
-    console.log(this.index);
     const dialogRef = this.dialog.open(EditAssetAllocationDialogComponent, {
       data: {id: id, assetId: assetId, allocatedById: allocatedById, allocatedToId: allocatedToId, allocatedDate: allocatedDate, returnDate: returnDate, status: status}
     });

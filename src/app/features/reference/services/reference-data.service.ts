@@ -55,7 +55,6 @@ export class ReferenceDataService {
   }
 
   deleteReference(id: number): void {
-    console.log(id);
     this.httpClient.delete('ReferList/DeleteReferList/'+id).subscribe((data:any) => {
       //this.dataChange.next(data);
     },
@@ -103,7 +102,6 @@ export class ReferenceDataService {
   // DELETE METHOD
   deleteItem(id: number): void {
     this.httpClient.delete(this.API_URL + id).subscribe(data => {
-      console.log(data['']);
         this.toasterService.showToaster('Successfully deleted', 3000);
       },
       (err: HttpErrorResponse) => {

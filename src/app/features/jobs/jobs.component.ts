@@ -4,6 +4,9 @@ import { HttpCommonService } from 'src/app/core/services/httpCommon.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { JobsDialogComponent } from '../jobs/jobs-dialog/jobs-dialog.component';
 import { JobsDataService } from './jobs-data.service';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { CandidateComponent } from '../candidate/candidate.component';
+import { AddCandidateDialogComponent } from '../candidate/dialogs/add/add-candidate.dialog.component';
 
 
 @Component({
@@ -19,11 +22,13 @@ import { JobsDataService } from './jobs-data.service';
 export class JobsComponent implements OnInit {
     jobsDatabase?: JobsDataService | null;
     jobs:any[] = [];
+    statuses = ['ACTIVE', 'INACTIVE','REFERRED']
     isDeletedJobsShow = false;
 
     constructor(public httpClient: HttpCommonService ,
               public dialog: MatDialog,
-              public dataService: JobsDataService ) { }
+              public dataService: JobsDataService,
+              private authService: AuthenticationService) { }
 
               ngOnInit() {
                 this.getAllJobs();
@@ -37,7 +42,6 @@ export class JobsComponent implements OnInit {
                 dialogRef.afterClosed().subscribe(result => {
                   this.getAllJobs();
                    // this.jobsDatabase!.dataChange.value.push(this.dataService.getDialogData());
-                //   console.log('The dialog was closed');
                   });
               }
 
@@ -77,5 +81,22 @@ export class JobsComponent implements OnInit {
       (error: HttpErrorResponse) => {
       console.log (error.name + ' ' + error.message);
       });
+  }
+  onApply (jobId: number): void {
+    // this.dialogData = candidate;
+    this.httpClient.post('Openjobs/ApplyJob',{jobId:jobId,employeeId:(this.authService.getUser() as any).employeeId}).subscribe((data:any) => {
+      //this.dataChange.next(data);
+    },
+    (error: HttpErrorResponse) => {
+    console.log (error.name + ' ' + error.message);
+    });
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddCandidateDialogComponent, {
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

@@ -13,6 +13,7 @@ import { EmployeeDataSource } from './employee-datasource';
 import { AddEmployeeDialogComponent } from './dialogs/add/add-employee.dialog.component';
 import { EditEmployeeDialogComponent } from './dialogs/edit/edit-employee.dialog.component';
 import { DeleteEmployeeDialogComponent } from './dialogs/delete/delete-employee.dialog.component';
+import { SetClientPerHourDialogComponent } from './dialogs/set-ClientPerHour/set-clientperhour.dialog.component';
 
 
 @Component({
@@ -29,6 +30,8 @@ export class EmployeeComponent implements OnInit {
   employees=[{id:0,firstName:'',lastName:''}]
   basicInfo: any = {id:0,employeeId:'',fatherName:'',mothername:'',bloodGroup:'',personalEmailId:'',dateOfBirth:'',isMarried:false,maritalStatus:'',spouseName:'',permanentAddress:'',isBothAddressSame:false,currentAddress:'',gender:''};
   contact: any = {id:0,employeeId:'',personalEmailId:'',phoneNumber:'',workEmail:'',emergencyContactName:'',emergencyContactNumber:''};
+  user: any ={id:0,employeeId:'',userType:'',userName:'',password:'',email:'',status:''};
+  selectedTab=0;
   constructor(public httpClient: HttpCommonService,
               public dialog: MatDialog,
               public dataService: EmployeeDataService) {
@@ -48,7 +51,6 @@ export class EmployeeComponent implements OnInit {
       (error: HttpErrorResponse) => {
       console.log (error.name + ' ' + error.message);
       });;
-                //console.log(this.employees)
 
 
   }
@@ -76,7 +78,6 @@ export class EmployeeComponent implements OnInit {
     this.id = id;
     // index row is used just for debugging proposes and can be removed
     this.index = i;
-    console.log(this.index);
     const dialogRef = this.dialog.open(EditEmployeeDialogComponent, {
       data: {id: id, firstName: firstName, lastName: lastName, email: email, phoneNumber: phoneNumber,employeeType: employeeType, status: status}
     });
@@ -106,6 +107,22 @@ export class EmployeeComponent implements OnInit {
         // for delete we use splice in order to remove single object from UserDataService
         this.userDatabase!.dataChange.value.splice(foundIndex, 1);
         this.refreshTable();
+      }
+    });
+  }
+
+  setClientPerHour(i: number, id: number, perHour: number, firstName: string, lastName: string) {
+    this.index = i;
+    this.id = id;
+    const dialogRef = this.dialog.open(SetClientPerHourDialogComponent, {
+      data: {id: id,perHour: perHour,firstName: firstName,lastName: lastName}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        // const foundIndex = this.ClientDatabase!.dataChange.value.findIndex(x => x.id === this.id);
+        // this.ClientDatabase!.dataChange.value.splice(foundIndex, 1);
+        this.loadData();
       }
     });
   }
@@ -152,22 +169,25 @@ export class EmployeeComponent implements OnInit {
   }
 
   onChangeEmployee(event:any) {
-    console.log(event.value);
-    this.dataService.getEmployeeBasicInfoByEmpId(event.value).subscribe((data:any) => {
-      this.basicInfo = data;
-      },
-      (error: HttpErrorResponse) => {
-      console.log (error.name + ' ' + error.message);
-      });
+    this.showBasic(event.value);
+    // this.dataService.getEmployeeBasicInfoByEmpId(event.value).subscribe((data:any) => {
+    //   this.basicInfo = data;
+    //   },
+    //   (error: HttpErrorResponse) => {
+    //   console.log (error.name + ' ' + error.message);
+    //   });
   }
   onChangeEmployee_Contact(event:any) {
-    console.log(event.value);
-    this.dataService.getEmployeeContactByEmpId(event.value).subscribe((data:any) => {
-      this.contact = data;
-      },
-      (error: HttpErrorResponse) => {
-      console.log (error.name + ' ' + error.message);
-      });
+    this.showContact(event.value);
+    // this.dataService.getEmployeeContactByEmpId(event.value).subscribe((data:any) => {
+    //   this.contact = data;
+    //   },
+    //   (error: HttpErrorResponse) => {
+    //   console.log (error.name + ' ' + error.message);
+    //   });
+  }
+  onChangeUser(event:any) {
+    this.showUser(event.value);
   }
   submit() {
   // empty stuff
@@ -178,5 +198,34 @@ export class EmployeeComponent implements OnInit {
   confirmAddContact(){
     this.dataService.addEmployeeContact(this.contact);
   }
-
+  confirmAddUser(){
+    this.dataService.addUser(this.user);
+  }
+  showBasic(empid :number){
+    this.dataService.getEmployeeBasicInfoByEmpId(empid).subscribe((data:any) => {
+      this.basicInfo = data;
+      this.selectedTab = 1;
+      },
+      (error: HttpErrorResponse) => {
+      console.log (error.name + ' ' + error.message);
+      });
+  }
+  showContact(empid :number){
+    this.dataService.getEmployeeContactByEmpId(empid).subscribe((data:any) => {
+      this.contact = data;
+      this.selectedTab = 2;
+      },
+      (error: HttpErrorResponse) => {
+      console.log (error.name + ' ' + error.message);
+      });
+  }
+  showUser(empid :number){
+    this.dataService.getUser(empid).subscribe((data:any) => {
+      this.user = data;
+      this.selectedTab = 3;
+      },
+      (error: HttpErrorResponse) => {
+      console.log (error.name + ' ' + error.message);
+      });
+  }
 }

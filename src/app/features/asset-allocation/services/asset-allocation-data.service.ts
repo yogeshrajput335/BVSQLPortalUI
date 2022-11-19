@@ -83,7 +83,6 @@ export class AssetAllocationDataService {
   }
 
   deleteAssetAllocation (id: number): void {
-    console.log(id);
     this.httpClient.delete('AssetAllocation/DeleteAssetAllocation/'+id).subscribe((data:any) => {
       //this.dataChange.next(data);
     },

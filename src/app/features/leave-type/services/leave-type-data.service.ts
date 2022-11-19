@@ -53,7 +53,6 @@ export class LeaveTypeDataService {
   }
 
   deleteLeaveType (id: number): void {
-    console.log(id);
     this.httpClient.delete('LeaveType/DeleteLeaveType/'+id).subscribe((data:any) => {
       //this.dataChange.next(data);
     },

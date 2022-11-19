@@ -56,7 +56,6 @@ export class AssetTypeDataService {
   }
 
   deleteAssetType (id: number): void {
-    console.log(id);
     this.httpClient.delete('AssetType/DeleteAssetType/'+id).subscribe((data:any) => {
       //this.dataChange.next(data);
     },

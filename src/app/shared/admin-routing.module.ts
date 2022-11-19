@@ -23,6 +23,8 @@ import { ClientComponent } from './../features/client/client.component';
 import { ProjectComponent } from '../features/project/project.component';
 import { AssetComponent } from '../features/asset/asset.component';
 import { EmployeeComponent } from '../features/employee/employee.component';
+import { InvoiceDetailsComponent } from '../features/invoice_details/invoice-details.component';
+
 const routes: Routes = [
   {
     path: "",
@@ -51,6 +53,7 @@ const routes: Routes = [
       { path: "holiday", component: HolidayComponent },
       { path: "employee", component: EmployeeComponent },
       { path: "invoice", component: InvoicesComponent },
+      { path: "invoice-details", component: InvoiceDetailsComponent },
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },

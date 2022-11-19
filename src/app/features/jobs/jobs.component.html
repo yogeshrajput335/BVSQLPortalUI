@@ -30,9 +30,9 @@
 
     <div class="example-button-row">
 
-      <button mat-raised-button color="primary" *ngIf="isDeletedJobsShow==false">Apply</button>
+      <button mat-raised-button color="primary" (click)="onApply(job.id)" *ngIf="isDeletedJobsShow==false">Apply</button>
 
-      <button mat-raised-button color="accent" style="margin-left: 10px;" *ngIf="isDeletedJobsShow==false">Refer</button>
+      <button mat-raised-button  (click)="openDialog()" color="accent" style="margin-left: 10px;" *ngIf="isDeletedJobsShow==false">Refer</button>
       <button mat-raised-button (click)="onDelete(job.id)"color="warn" style="margin-left: 10px;" *ngIf="isDeletedJobsShow==false">Delete</button>
       <button mat-raised-button (click)="onSetActiveJob(job.id)"color="accent" *ngIf="isDeletedJobsShow==true">Set Active</button>
     </div>
