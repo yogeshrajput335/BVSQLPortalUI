@@ -1,7 +1,7 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {ClientDataService} from '../../services/client-data.service';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { ClientDataService } from '../../services/client-data.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-client.dialog',
@@ -9,15 +9,14 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: ['../../dialogs/edit/edit-client.dialog.css']
 })
 export class EditClientDialogComponent {
-  statuses:any
+  statuses: any
   constructor(public dialogRef: MatDialogRef<EditClientDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: ClientDataService) {
-                this.statuses = this.dataService.getStatues()
-              }
+    @Inject(MAT_DIALOG_DATA) public data: any, public dataService: ClientDataService) {
+    this.statuses = this.dataService.getStatues()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -27,7 +26,7 @@ export class EditClientDialogComponent {
   }
 
   submit() {
-    // emppty stuff
+   
   }
 
   onNoClick(): void {

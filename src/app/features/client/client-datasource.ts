@@ -1,10 +1,10 @@
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {DataSource} from '@angular/cdk/collections';
-import {BehaviorSubject, merge, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { DataSource } from '@angular/cdk/collections';
+import { BehaviorSubject, merge, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Client } from './models/Client';
-import {ClientDataService} from './services/client-data.service';
+import { ClientDataService } from './services/client-data.service';
 
 export class ClientDataSource extends DataSource<Client> {
   _filterChange = new BehaviorSubject('');
@@ -21,17 +21,15 @@ export class ClientDataSource extends DataSource<Client> {
   renderedData: Client[] = [];
 
   constructor(public _exampleDatabase: ClientDataService,
-              public _paginator: MatPaginator,
-              public _sort: MatSort) {
+    public _paginator: MatPaginator,
+    public _sort: MatSort) {
     super();
-    // Reset to the first page when the user changes the filter.
+
     this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
     this._exampleDatabase.getAllClient();
   }
 
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Client[]> {
-    // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
       this._sort.sortChange,
@@ -42,28 +40,23 @@ export class ClientDataSource extends DataSource<Client> {
     this._exampleDatabase.getAllClient();
 
 
-    return merge(...displayDataChanges).pipe(map( () => {
-        // Filter data
-        this.filteredData = this._exampleDatabase.data.slice().filter((issue: Client) => {
-          const searchStr = (issue.id + issue.clientName + issue.contactPerson +issue.email+ issue.phoneNumber + issue.address + issue.status).toLowerCase();
-          return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
-        });
+    return merge(...displayDataChanges).pipe(map(() => {
+      this.filteredData = this._exampleDatabase.data.slice().filter((issue: Client) => {
+        const searchStr = (issue.id + issue.clientName + issue.contactPerson + issue.email + issue.phoneNumber + issue.address + issue.status).toLowerCase();
+        return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+      });
 
-        // Sort filtered data
-        const sortedData = this.sortData(this.filteredData.slice());
+      const sortedData = this.sortData(this.filteredData.slice());
 
-        // Grab the page's slice of the filtered sorted data.
-        const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-        this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
-        return this.renderedData;
-      }
+      const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+      this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
+      return this.renderedData;
+    }
     ));
   }
 
-  disconnect() {}
+  disconnect() { }
 
-
-  /** Returns a sorted copy of the database data. */
   sortData(data: Client[]): Client[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;

@@ -2,7 +2,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 import { AssetAllocationDataService } from '../../services/asset-allocation-data.service';
 
-
 @Component({
   selector: 'app-delete-asset-allocation.dialog',
   templateUrl: '../../dialogs/delete/delete-asset-allocation.dialog.html',

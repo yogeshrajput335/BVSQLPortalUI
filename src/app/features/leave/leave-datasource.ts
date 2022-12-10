@@ -1,8 +1,8 @@
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {DataSource} from '@angular/cdk/collections';
-import {BehaviorSubject, merge, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { DataSource } from '@angular/cdk/collections';
+import { BehaviorSubject, merge, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Leave } from './models/Leave';
 import { LeaveDataService } from './services/leave-data.service';
 
@@ -21,17 +21,15 @@ export class LeaveDataSource extends DataSource<Leave> {
   renderedData: Leave[] = [];
 
   constructor(public _exampleDatabase: LeaveDataService,
-              public _paginator: MatPaginator,
-              public _sort: MatSort) {
+    public _paginator: MatPaginator,
+    public _sort: MatSort) {
     super();
-    // Reset to the first page when the user changes the filter.
+
     this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
     this._exampleDatabase.getAllLeaves();
   }
 
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Leave[]> {
-    // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
       this._sort.sortChange,
@@ -42,28 +40,23 @@ export class LeaveDataSource extends DataSource<Leave> {
     this._exampleDatabase.getAllLeaves();
 
 
-    return merge(...displayDataChanges).pipe(map( () => {
-        // Filter data
-        this.filteredData = this._exampleDatabase.data.slice().filter((issue: Leave) => {
-          const searchStr = (issue.id + issue.fullName + issue.leaveType).toLowerCase();
-          return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
-        });
+    return merge(...displayDataChanges).pipe(map(() => {
+      this.filteredData = this._exampleDatabase.data.slice().filter((issue: Leave) => {
+        const searchStr = (issue.id + issue.fullName + issue.leaveType).toLowerCase();
+        return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+      });
 
-        // Sort filtered data
-        const sortedData = this.sortData(this.filteredData.slice());
+      const sortedData = this.sortData(this.filteredData.slice());
 
-        // Grab the page's slice of the filtered sorted data.
-        const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-        this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
-        return this.renderedData;
-      }
+      const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+      this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
+      return this.renderedData;
+    }
     ));
   }
 
-  disconnect() {}
+  disconnect() { }
 
-
-  /** Returns a sorted copy of the database data. */
   sortData(data: Leave[]): Leave[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
@@ -77,8 +70,6 @@ export class LeaveDataSource extends DataSource<Leave> {
         case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
         case 'fullName': [propertyA, propertyB] = [a.fullName, b.fullName]; break;
         case 'leaveType': [propertyA, propertyB] = [a.leaveType, b.leaveType]; break;
-        // case 'toDate': [propertyA, propertyB] = [a.toDate.toString(), b.toDate.toString()]; break;
-        // case 'fromDate': [propertyA, propertyB] = [a.fromDate.toString(), b.fromDate.toString()]; break;
         case 'status': [propertyA, propertyB] = [a.status, b.status]; break;
       }
 

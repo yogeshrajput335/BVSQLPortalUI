@@ -1,56 +1,43 @@
+<button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button>
 <div class="container">
-  <h3 mat-dialog-title>Add new Project Assignment</h3>
+  <h3 mat-dialog-title>Add Project Assignment</h3>
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
-    <!-- <div class="form">
-      <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="Id" [(ngModel)]="data.id" name="id" required >
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
-    </div> -->
-
-    <div class="form">
-      <mat-form-field color="accent">
-        <mat-label>Project </mat-label>
-        <mat-select [(ngModel)]="data.projectId" name="projectId"  color="accent" >
+    <div class="example-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Project</mat-label>
+        <mat-select [(ngModel)]="data.projectId" name="projectId" color="accent">
           <mat-option *ngFor="let s of projects" [value]="s.id">
             {{s.projectName}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent">
-        <mat-label>Employee </mat-label>
-        <mat-select [(ngModel)]="data.employeeId" name="employeeId"  color="accent" >
+      <mat-form-field appearance="outline">
+        <mat-label>Employee</mat-label>
+        <mat-select [(ngModel)]="data.employeeId" name="employeeId" color="accent">
           <mat-option *ngFor="let s of employees" [value]="s.id">
             {{s.firstName + " " + s.lastName}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
 
-    
-    <div class="form">
-      <mat-form-field color="accent">
-        <textarea matInput #input class="form-control" placeholder="Notes" [(ngModel)]="data.notes" name="notes" ></textarea>
+      <mat-form-field appearance="outline">
+        <mat-label>Notes</mat-label>
+        <textarea matInput #input class="form-control" placeholder="Notes" [(ngModel)]="data.notes"
+          name="notes"></textarea>
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent" appearance="fill"  >
+      <mat-form-field appearance="outline">
         <mat-label>Choose a start date</mat-label>
         <input matInput [matDatepicker]="startDate" [(ngModel)]="data.startDate" name="startDate">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
         <mat-datepicker #startDate></mat-datepicker>
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent" appearance="fill"  >
+      <mat-form-field appearance="outline">
         <mat-label>Choose a end date</mat-label>
         <input matInput [matDatepicker]="endDate" [(ngModel)]="data.endDate" name="endDate">
         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -59,9 +46,9 @@
       </mat-form-field>
     </div>
 
-  <div mat-dialog-actions>
-      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
-      <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn">Cancel</button>
+    <div mat-dialog-actions>
+      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+        (click)="confirmAdd()">Save</button>
     </div>
   </form>
 </div>

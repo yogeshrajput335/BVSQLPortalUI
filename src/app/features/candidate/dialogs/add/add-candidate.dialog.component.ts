@@ -1,8 +1,8 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {CandidateDataService} from '../../services/candidate-data.service';
-import {FormControl, Validators} from '@angular/forms';
-import {Candidate} from '../../models/Candidate';
+import { Component, Inject } from '@angular/core';
+import { CandidateDataService } from '../../services/candidate-data.service';
+import { FormControl, Validators } from '@angular/forms';
+import { Candidate } from '../../models/Candidate';
 
 @Component({
   selector: 'app-add-candidate.dialog',
@@ -11,16 +11,15 @@ import {Candidate} from '../../models/Candidate';
 })
 
 export class AddCandidateDialogComponent {
-  statuses:any
+  statuses: any
   constructor(public dialogRef: MatDialogRef<AddCandidateDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Candidate,
-              public dataService: CandidateDataService) {
-                this.statuses = this.dataService.getStatues()
-               }
+    @Inject(MAT_DIALOG_DATA) public data: Candidate,
+    public dataService: CandidateDataService) {
+    this.statuses = this.dataService.getStatues()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -30,7 +29,7 @@ export class AddCandidateDialogComponent {
   }
 
   submit() {
-  // empty stuff
+    
   }
 
   onNoClick(): void {

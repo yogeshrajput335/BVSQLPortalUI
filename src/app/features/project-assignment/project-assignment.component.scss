@@ -1,23 +1,27 @@
 .full-width-table {
     width: 100%;
   }
+
   .mat-elevation-z8-tree{
     margin: 10px;
     height: 394px;
     overflow: auto;
     box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
   }
+
   .mat-tree {
     margin: 10px !important;
   }
+
   .mat-card{
     margin: 10px !important;
   }
+
   .mat-elevation-z8{
     margin: 10px;
-    //height: 394px;
     overflow: auto;
   }
+
   ::ng-deep.mat-table {
     height: 280px !important;
    }
@@ -25,10 +29,12 @@
   .fill-remaining-space {
     float: right;
   }
+
   .mat-chip {
     font-size: 11px;
     font-weight: 500;
   }
+
   .mat-standard-chip {
   min-height: 20px;
   }
@@ -38,14 +44,15 @@
     height: 25px;
     line-height: 25px;
   }
+
   .mat-header-row{
     background-color: rgb(241 243 244);
   }
+
   .mat-header-cell {
     color: #505050;
     font-size: 14px;
   }
-
 
 .temp {
     color: black;
@@ -61,11 +68,13 @@
 .big-text {
   font-size: 30px;
 }
+
 .small-text {
   margin-top:10px !important;
   color: #0182ad;
   font-weight: bold;
 }
+
 mat-card::ng-deep.mat-card-header-text {
   width: 100%;
 }
@@ -79,6 +88,26 @@ mat-card::ng-deep.mat-card-header-text {
     padding: 10px;
   }
 }
+
 .mat-tree-node {
   min-height: 2px;
 }
+.mat-header-cell {
+  color: #505050;
+  font-size: 14px;
+}
+
+.form{
+  height: 40px;
+  width:100%;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto !important;
+}
+
+.cancelBtn{
+  float: right;
+  min-width: 38px !important;
+}
+

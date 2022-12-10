@@ -1,192 +1,179 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Project Wise Employee Tree View">
-    <div style="width:100%;display: flex;" >
-        <div style="width:50%" class="container mat-elevation-z8-tree">
-          <mat-card class="mat-elevation-z5">
-            <mat-card-title-group>
-              <mat-card-title>Number of Clients </mat-card-title>
-              <mat-card-subtitle>Status Wise</mat-card-subtitle>
-            </mat-card-title-group>
-            <mat-card-content>
-              <div class="flex-row">
-                <div class="temp">
-                  <span class="big-text">{{summaryData.activeClientCount}}</span>
-                  <span class="small-text">
-                    <mat-chip color="primary" selected>Active Clients</mat-chip>
-                  </span>
-                </div>
-                <div class="temp">
-                  <span class="big-text">{{summaryData.inactiveClientCount}}</span>
-                  <span class="small-text">
-                    <mat-chip color="warn" selected>Inactive Clients</mat-chip>
-                  </span>
-                </div>
-                <div class="temp">
-                  <span class="big-text">{{summaryData.totalClientCount}}</span>
-                  <span class="small-text">
-                    <mat-chip color="accent" selected>Total Clients</mat-chip>
-                  </span>
-                </div>
-              </div>
-            </mat-card-content>
-          </mat-card>
-          <mat-card  class="mat-elevation-z5">
-            <mat-card-title-group>
-              <mat-card-title>Number of Projects </mat-card-title>
-              <mat-card-subtitle>Status Wise</mat-card-subtitle>
-            </mat-card-title-group>
-            <mat-card-content>
-              <div class="flex-row">
-                <div class="temp">
-                  <span class="big-text">{{summaryData.newProjectsCount}}</span>
-                  <span class="small-text">
-                    <mat-chip color="accent" selected>New Projects</mat-chip>
-                  </span>
-                </div>
-                <div class="temp">
-                  <span class="big-text">{{summaryData.approvedProjectsCount}}</span>
-                  <span class="small-text">
-                    <mat-chip color="primary" selected>Approved Projects</mat-chip>
-                  </span>
-                </div>
-                <div class="temp">
-                  <span class="big-text">{{summaryData.rejectedProjectsCount}}</span>
-                  <span class="small-text">
-                    <mat-chip color="warn" selected>Rejected Projects</mat-chip>
-                  </span>
-                </div>
-              </div>
-            </mat-card-content>
-          </mat-card>
-          <mat-card  class="mat-elevation-z5">
-            <mat-card-title-group>
-              <mat-card-title>Number of Employees</mat-card-title>
-              <mat-card-subtitle>Status Wise</mat-card-subtitle>
-            </mat-card-title-group>
-            <mat-card-content>
-              <div class="flex-row">
-                <div class="temp">
-                  <span class="big-text">{{summaryData.activeEmployeeCount}}</span>
-                  <span class="small-text">
-                    <mat-chip color="primary" selected>Active Employees</mat-chip>
-                  </span>
-                </div>
-                <div class="temp">
-                  <span class="big-text">{{summaryData.inactiveEmployeeCount}}</span>
-                  <span class="small-text">
-                    <mat-chip color="warn" selected>Inactive Employees</mat-chip>
-                  </span>
-                </div>
-              </div>
-            </mat-card-content>
-          </mat-card>
-          <mat-card  class="mat-elevation-z5">
-            <mat-card-title-group>
-              <mat-card-title>Employee Count</mat-card-title>
-              <mat-card-subtitle>Project Wise</mat-card-subtitle>
-            </mat-card-title-group>
-            <mat-card-content>
-              <ul>
-                <li *ngFor="let e of summaryData.projectEmpCount">
-                  <mat-chip>{{e.projectName}}</mat-chip>
-                  <mat-chip color="primary" selected>{{e.employeeCount}}</mat-chip>
-                </li>
-              </ul>
-            </mat-card-content>
-          </mat-card>
-          <mat-card  class="mat-elevation-z5">
-            <mat-card-title-group>
-              <mat-card-title>Employee Count</mat-card-title>
-              <mat-card-subtitle>Client Wise</mat-card-subtitle>
-            </mat-card-title-group>
-            <mat-card-content>
-              <ul>
-                <li *ngFor="let e of summaryData.clientEmpCount">
-                  <mat-chip>{{e.clientName}}</mat-chip>
-                  <mat-chip color="primary" selected >{{e.employeeCount}}</mat-chip>
-                </li>
-              </ul>
-            </mat-card-content>
-          </mat-card>
-          <mat-card  class="mat-elevation-z5">
-            <mat-card-title-group>
-              <mat-card-title>Project Count</mat-card-title>
-              <mat-card-subtitle>Client Wise</mat-card-subtitle>
-            </mat-card-title-group>
-            <mat-card-content>
-              <ul>
-                <li *ngFor="let e of summaryData.clientProjectCount">
-                  <mat-chip>{{e.clientName}}</mat-chip>
-                  <mat-chip color="primary" selected>{{e.projectCount}}</mat-chip>
-                </li>
-              </ul>
-            </mat-card-content>
-          </mat-card>
+    <div style="width:100%;display: flex;">
+      <div style="width:50%" class="container mat-elevation-z8-tree">
+        <mat-card class="mat-elevation-z5">
+          <mat-card-title-group>
+            <mat-card-title>Number of Clients </mat-card-title>
+            <mat-card-subtitle>Status Wise</mat-card-subtitle>
+          </mat-card-title-group>
 
-        </div>
-        <div style="width:50%" class="container mat-elevation-z8-tree">
-          <mat-chip-list aria-label="Fish selection">
-            <mat-chip color="accent" selected>Client</mat-chip>
-            <mat-chip color="warn" selected>Project</mat-chip>
-            <mat-chip color="primary" selected>Employee</mat-chip>
-          </mat-chip-list>
-          <mat-tree [dataSource]="treeDataSource" [treeControl]="treeControl">
-            <!-- This is the tree node template for leaf nodes -->
-            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-              <!-- use a disabled button to provide padding for tree leaf -->
-              <button mat-icon-button disabled></button>
-              <mat-chip color="primary" selected>{{node.name}}</mat-chip>
+          <mat-card-content>
+            <div class="flex-row">
+              <div class="temp">
+                <span class="big-text">{{summaryData.activeClientCount}}</span>
+                <span class="small-text">
+                  <mat-chip color="primary" selected>Active Clients</mat-chip>
+                </span>
+              </div>
 
-            </mat-tree-node>
-            <!-- This is the tree node template for expandable nodes -->
-            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-              <button mat-icon-button matTreeNodeToggle
-                      [attr.aria-label]="'Toggle ' + node.name">
-                <mat-icon class="mat-icon-rtl-mirror">
-                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                </mat-icon>
-              </button>
-              <mat-chip color="accent" selected *ngIf="node.level===0">{{node.name}}</mat-chip>
-              <mat-chip color="warn" selected *ngIf="node.level===1">{{node.name}}</mat-chip>
-            </mat-tree-node>
-          </mat-tree>
-        </div>
+              <div class="temp">
+                <span class="big-text">{{summaryData.inactiveClientCount}}</span>
+                <span class="small-text">
+                  <mat-chip color="warn" selected>Inactive Clients</mat-chip>
+                </span>
+              </div>
+
+              <div class="temp">
+                <span class="big-text">{{summaryData.totalClientCount}}</span>
+                <span class="small-text">
+                  <mat-chip color="accent" selected>Total Clients</mat-chip>
+                </span>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mat-elevation-z5">
+          <mat-card-title-group>
+            <mat-card-title>Number of Projects </mat-card-title>
+            <mat-card-subtitle>Status Wise</mat-card-subtitle>
+          </mat-card-title-group>
+
+          <mat-card-content>
+            <div class="flex-row">
+              <div class="temp">
+                <span class="big-text">{{summaryData.newProjectsCount}}</span>
+                <span class="small-text">
+                  <mat-chip color="accent" selected>New Projects</mat-chip>
+                </span>
+              </div>
+
+              <div class="temp">
+                <span class="big-text">{{summaryData.approvedProjectsCount}}</span>
+                <span class="small-text">
+                  <mat-chip color="primary" selected>Approved Projects</mat-chip>
+                </span>
+              </div>
+
+              <div class="temp">
+                <span class="big-text">{{summaryData.rejectedProjectsCount}}</span>
+                <span class="small-text">
+                  <mat-chip color="warn" selected>Rejected Projects</mat-chip>
+                </span>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mat-elevation-z5">
+          <mat-card-title-group>
+            <mat-card-title>Number of Employees</mat-card-title>
+            <mat-card-subtitle>Status Wise</mat-card-subtitle>
+          </mat-card-title-group>
+          <mat-card-content>
+            <div class="flex-row">
+              <div class="temp">
+                <span class="big-text">{{summaryData.activeEmployeeCount}}</span>
+                <span class="small-text">
+                  <mat-chip color="primary" selected>Active Employees</mat-chip>
+                </span>
+              </div>
+
+              <div class="temp">
+                <span class="big-text">{{summaryData.inactiveEmployeeCount}}</span>
+                <span class="small-text">
+                  <mat-chip color="warn" selected>Inactive Employees</mat-chip>
+                </span>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mat-elevation-z5">
+          <mat-card-title-group>
+            <mat-card-title>Employee Count</mat-card-title>
+            <mat-card-subtitle>Project Wise</mat-card-subtitle>
+          </mat-card-title-group>
+          <mat-card-content>
+            <ul>
+              <li *ngFor="let e of summaryData.projectEmpCount">
+                <mat-chip>{{e.projectName}}</mat-chip>
+                <mat-chip color="primary" selected>{{e.employeeCount}}</mat-chip>
+              </li>
+            </ul>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mat-elevation-z5">
+          <mat-card-title-group>
+            <mat-card-title>Employee Count</mat-card-title>
+            <mat-card-subtitle>Client Wise</mat-card-subtitle>
+          </mat-card-title-group>
+
+          <mat-card-content>
+            <ul>
+              <li *ngFor="let e of summaryData.clientEmpCount">
+                <mat-chip>{{e.clientName}}</mat-chip>
+                <mat-chip color="primary" selected>{{e.employeeCount}}</mat-chip>
+              </li>
+            </ul>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="mat-elevation-z5">
+          <mat-card-title-group>
+            <mat-card-title>Project Count</mat-card-title>
+            <mat-card-subtitle>Client Wise</mat-card-subtitle>
+          </mat-card-title-group>
+
+          <mat-card-content>
+            <ul>
+              <li *ngFor="let e of summaryData.clientProjectCount">
+                <mat-chip>{{e.clientName}}</mat-chip>
+                <mat-chip color="primary" selected>{{e.projectCount}}</mat-chip>
+              </li>
+            </ul>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+      <div style="width:50%" class="container mat-elevation-z8-tree">
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip color="accent" selected>Client</mat-chip>
+          <mat-chip color="warn" selected>Project</mat-chip>
+          <mat-chip color="primary" selected>Employee</mat-chip>
+        </mat-chip-list>
+
+        <mat-tree [dataSource]="treeDataSource" [treeControl]="treeControl">
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+            <button mat-icon-button disabled></button>
+            <mat-chip color="primary" selected>{{node.name}}</mat-chip>
+          </mat-tree-node>
+          <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button>
+            <mat-chip color="accent" selected *ngIf="node.level===0">{{node.name}}</mat-chip>
+            <mat-chip color="warn" selected *ngIf="node.level===1">{{node.name}}</mat-chip>
+          </mat-tree-node>
+        </mat-tree>
+      </div>
     </div>
   </mat-tab>
+
   <mat-tab label="Manage Employee">
 
     <div class="container mat-elevation-z8">
 
-      <div class="form">
-        <span style="font-size: 20px;margin-left:20px">Project Assignment List</span>
-      <span class="spacer"></span>
-
-
-        <mat-form-field floatPlaceholder="never" color="accent" style="margin-left: 50px;">
-          <input matInput #filter placeholder="Filter Project Assignment">
-        </mat-form-field>
-        <button mat-icon-button (click)="refresh()" style="float: right;">
-          <mat-icon>refresh</mat-icon>
-        </button>
-      </div>
-
       <mat-table #table [dataSource]="dataSource!" matSort class="mat-cell">
-        ng update @angular/cli @angular/core
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-
-        <!-- ID Column -->
-        <!-- <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
-          <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
-        </ng-container> -->
-
 
         <ng-container matColumnDef="projectName">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Project</mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.projectName}}</mat-cell>
         </ng-container>
-
 
         <ng-container matColumnDef="employeeName">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Employee</mat-header-cell>
@@ -205,25 +192,40 @@
 
         <ng-container matColumnDef="endDate">
           <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
-          <mat-cell *matCellDef="let row" > {{row.endDate!==null?(row.endDate  | date :'longDate'):'--'}}</mat-cell>
+          <mat-cell *matCellDef="let row"> {{row.endDate!==null?(row.endDate | date :'longDate'):'--'}}</mat-cell>
         </ng-container>
 
-        <!-- actions -->
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef>
             <button mat-icon-button (click)="addNew()">
               <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
             </button>
+            <button mat-icon-button (click)="openSearchFilter()">
+              <mat-icon aria-label="Example icon-button with a heart icon">search</mat-icon>
+            </button>
+            <button mat-icon-button (click)="exportexcel()">
+              <mat-icon aria-label="Example icon-button with a heart icon">file_download</mat-icon>
+            </button>
+            <button mat-icon-button (click)="onSearchFilter('')">
+              <mat-icon aria-label="Example icon-button with a heart icon">refresh</mat-icon>
+            </button>
           </mat-header-cell>
 
           <mat-cell *matCellDef="let row; let i=index;">
-            <button mat-icon-button color="primary" (click)="startEdit(i, row.id, row.projectId, row.employeeId, row.notes, row.startDate, row.endDate)">
-              <mat-icon aria-label="Edit">edit</mat-icon>
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
             </button>
 
-            <button mat-icon-button color="warn" (click)="deleteItem(i, row.id, row.projectId)">
-              <mat-icon aria-label="Delete">delete</mat-icon>
-            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item
+                (click)="startEdit(i, row.id, row.projectId, row.employeeId, row.notes, row.startDate, row.endDate)">
+                <span>Edit</span>
+              </button>
+
+              <button mat-menu-item (click)="deleteItem(i, row.id, row.projectId)">
+                <span>Delete</span>
+              </button>
+            </mat-menu>
           </mat-cell>
         </ng-container>
 
@@ -236,13 +238,33 @@
         No results
       </div>
 
-      <mat-paginator #paginator
-                    [length]="dataSource?.filteredData != null ? dataSource?.filteredData!.length :0"
-                    [pageIndex]="0"
-                    [pageSize]="10"
-                    [pageSizeOptions]="[5, 10, 25, 100]">
+      <mat-paginator #paginator [length]="dataSource?.filteredData != null ? dataSource?.filteredData!.length :0"
+        [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
       </mat-paginator>
     </div>
+
+
+    <ng-template let-bottomSheetRef="bottomSheetRef" #templateBottomSheet>
+      <button mat-raised-button (click)="closeSearchFilter()" color="warn" class="cancelBtn">X</button>
+      <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput #filter>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="onSearchFilter(filter.value)">Search</button><br />
+      <a href="javascript:;" (click)="onSearchFilter('')">Show all records</a>
+      <hr />
+      <div *ngIf="searchHistory.length==0">
+        No Search History
+      </div>
+      <div *ngIf="searchHistory.length>0" style="width:480px">
+        <div style="width:100%">
+          <label>Search History</label>
+          <a href="javascript:;" (click)="onClearSearchHistory()" *ngIf="searchHistory.length>0"
+            style="float:right">Clear Search History</a>
+        </div>
+        <mat-chip *ngFor="let item of searchHistory.reverse()" (click)="filter.value=item" style="margin-right:4px">
+          {{item}}</mat-chip>
+      </div>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>
-

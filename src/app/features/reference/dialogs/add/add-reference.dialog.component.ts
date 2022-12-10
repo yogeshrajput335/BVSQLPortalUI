@@ -1,8 +1,8 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {ReferenceDataService} from '../../services/reference-data.service';
-import {FormControl, Validators} from '@angular/forms';
-import {Reference} from '../../models/Reference';
+import { Component, Inject } from '@angular/core';
+import { ReferenceDataService } from '../../services/reference-data.service';
+import { FormControl, Validators } from '@angular/forms';
+import { Reference } from '../../models/Reference';
 
 @Component({
   selector: 'app-add-reference.dialog',
@@ -11,17 +11,16 @@ import {Reference} from '../../models/Reference';
 })
 
 export class AddReferenceDialogComponent {
-  statuses:any
-  empTypes:any
+  statuses: any
+  empTypes: any
   constructor(public dialogRef: MatDialogRef<AddReferenceDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Reference,
-              public dataService: ReferenceDataService) {
-                this.statuses = this.dataService.getStatues()
-              }
+    @Inject(MAT_DIALOG_DATA) public data: Reference,
+    public dataService: ReferenceDataService) {
+    this.statuses = this.dataService.getStatues()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -31,7 +30,7 @@ export class AddReferenceDialogComponent {
   }
 
   submit() {
-  // empty stuff
+    
   }
 
   onNoClick(): void {

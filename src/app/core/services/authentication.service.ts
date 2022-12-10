@@ -20,6 +20,7 @@ export class AuthenticationService {
 
         if (this.userList) {
           localStorage.setItem("token", this.token);
+          //localStorage.setItem("jwt", this.token);
           localStorage.setItem("user", JSON.stringify(this.userList));
           this.route.navigate(['/admin/dashboard'])
         } else {

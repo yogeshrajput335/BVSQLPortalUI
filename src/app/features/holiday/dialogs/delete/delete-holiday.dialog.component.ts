@@ -2,7 +2,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 import { HolidayDataService } from '../../services/holiday-data.service';
 
-
 @Component({
   selector: 'app-delete-holiday.dialog',
   templateUrl: '../../dialogs/delete/delete-holiday.dialog.html',

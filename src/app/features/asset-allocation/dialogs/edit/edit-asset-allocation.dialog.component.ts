@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { AssetAllocationDataService } from '../../services/asset-allocation-data.service';
 
 @Component({
@@ -9,19 +9,18 @@ import { AssetAllocationDataService } from '../../services/asset-allocation-data
   styleUrls: ['../../dialogs/edit/edit-asset-allocation.dialog.css']
 })
 export class EditAssetAllocationDialogComponent {
-  statuses:any
-  assets:any
-  employees:any
+  statuses: any
+  assets: any
+  employees: any
   constructor(public dialogRef: MatDialogRef<EditAssetAllocationDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: AssetAllocationDataService) {
-                this.statuses = this.dataService.getStatues()
-                this.assets = this.dataService.getAssets()
-                this.employees = this.dataService.getEmployees()
-              }
+    @Inject(MAT_DIALOG_DATA) public data: any, public dataService: AssetAllocationDataService) {
+    this.statuses = this.dataService.getStatues()
+    this.assets = this.dataService.getAssets()
+    this.employees = this.dataService.getEmployees()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -31,7 +30,7 @@ export class EditAssetAllocationDialogComponent {
   }
 
   submit() {
-    // emppty stuff
+    
   }
 
   onNoClick(): void {

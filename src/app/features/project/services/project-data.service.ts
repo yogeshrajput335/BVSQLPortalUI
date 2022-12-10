@@ -11,7 +11,6 @@ export class ProjectDataService {
   projectTypes=['Type A', 'Type B','Type c'];
   clients=[{id:0,clientName:''}];
   dataChange: BehaviorSubject<Project[]> = new BehaviorSubject<Project[]>([]);
-  // Temporarily stores data from dialogs
   dialogData: any;
 
   constructor (private httpClient: HttpCommonService) {
@@ -32,7 +31,6 @@ export class ProjectDataService {
     return this.dialogData;
   }
 
-  /** CRUD METHODS */
   getAllProjects(): void {
     this.httpClient.get('Project/GetProjects').subscribe((data:any) => {
         this.dataChange.next(data);
@@ -42,13 +40,11 @@ export class ProjectDataService {
       });
   }
 
-  // DEMO ONLY, you can find working methods below
   addProject (Project: Project): void {
     this.dialogData = Project;
     let e = this.getClients().filter(x=>x.id===Project.clientId)[0]
     Project.clientName = e.clientName;
     this.httpClient.post('Project/InsertProject',Project).subscribe((data:any) => {
-      //this.dataChange.next(data);
     },
     (error: HttpErrorResponse) => {
     console.log (error.name + ' ' + error.message);
@@ -60,7 +56,6 @@ export class ProjectDataService {
     let e = this.getClients().filter(x=>x.id===Project.clientId)[0]
     Project.clientName = e.clientName;
     this.httpClient.put('Project/UpdateProject',Project).subscribe((data:any) => {
-      //this.dataChange.next(data);
     },
     (error: HttpErrorResponse) => {
     console.log (error.name + ' ' + error.message);
@@ -69,7 +64,6 @@ export class ProjectDataService {
 
   deleteProject (id: number): void {
     this.httpClient.delete('Project/DeleteProject/'+id).subscribe((data:any) => {
-      //this.dataChange.next(data);
     },
     (error: HttpErrorResponse) => {
     console.log (error.name + ' ' + error.message);
@@ -79,9 +73,11 @@ export class ProjectDataService {
   getStatues(){
     return this.statuses
   }
+
   getClients(){
     return this.clients
   }
+  
   getProjectTypes(){
     return this.projectTypes
   }

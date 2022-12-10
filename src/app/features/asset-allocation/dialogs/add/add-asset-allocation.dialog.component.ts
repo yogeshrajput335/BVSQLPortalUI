@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { AssetAllocation } from '../../models/AssetAllocation';
 import { AssetAllocationDataService } from '../../services/asset-allocation-data.service';
 
@@ -11,20 +11,19 @@ import { AssetAllocationDataService } from '../../services/asset-allocation-data
 })
 
 export class AddAssetAllocationDialogComponent {
-  statuses:any
-  assets:any
-  employees:any
+  statuses: any
+  assets: any
+  employees: any
   constructor(public dialogRef: MatDialogRef<AddAssetAllocationDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: AssetAllocation,
-              public dataService: AssetAllocationDataService) {
-                this.statuses = this.dataService.getStatues()
-                this.assets = this.dataService.getAssets()
-                this.employees = this.dataService.getEmployees()
-               }
+    @Inject(MAT_DIALOG_DATA) public data: AssetAllocation,
+    public dataService: AssetAllocationDataService) {
+    this.statuses = this.dataService.getStatues()
+    this.assets = this.dataService.getAssets()
+    this.employees = this.dataService.getEmployees()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -34,7 +33,7 @@ export class AddAssetAllocationDialogComponent {
   }
 
   submit() {
-  // empty stuff
+   
   }
 
   onNoClick(): void {

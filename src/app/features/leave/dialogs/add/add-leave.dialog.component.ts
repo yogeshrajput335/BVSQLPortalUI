@@ -1,7 +1,7 @@
 import { LeaveType } from './../../../leave-type/models/LeaveType';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Leave } from '../../models/Leave';
 import { LeaveDataService } from '../../services/leave-data.service';
 
@@ -12,21 +12,20 @@ import { LeaveDataService } from '../../services/leave-data.service';
 })
 
 export class AddLeaveDialogComponent {
-  statuses:any
-  leaveTypes:any
-  employees:any
+  statuses: any
+  leaveTypes: any
+  employees: any
   constructor(public dialogRef: MatDialogRef<AddLeaveDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Leave,
-              public dataService: LeaveDataService) {
-                this.statuses = this.dataService.getStatues()
-                this.leaveTypes = this.dataService.getLeaveTypes()
-                this.employees = this.dataService.getEmployees()
+    @Inject(MAT_DIALOG_DATA) public data: Leave,
+    public dataService: LeaveDataService) {
+    this.statuses = this.dataService.getStatues()
+    this.leaveTypes = this.dataService.getLeaveTypes()
+    this.employees = this.dataService.getEmployees()
 
-              }
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -36,7 +35,7 @@ export class AddLeaveDialogComponent {
   }
 
   submit() {
-  // empty stuff
+    
   }
 
   onNoClick(): void {

@@ -1,27 +1,24 @@
+<button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button>
 <div class="container">
-  <h3 mat-dialog-title>Add new asset type</h3>
+  <h3 mat-dialog-title>Add Asset Type</h3>
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
-    <!--Textarea for demo purposes-->
-    <div class="form">
-      <mat-form-field color="accent">
+    <div class="example-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
         <input matInput #input class="form-control" placeholder="Name" [(ngModel)]="data.name" name="name" required />
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div>
 
-
-    <div class="form">
-      <mat-form-field color="accent">
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
         <input matInput placeholder="Description" [(ngModel)]="data.description" name="description">
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent">
+      <mat-form-field appearance="outline">
         <mat-label>Status</mat-label>
-        <mat-select [(ngModel)]="data.status" name="status"  color="accent" >
+        <mat-select [(ngModel)]="data.status" name="status" color="accent">
           <mat-option *ngFor="let s of statuses" [value]="s">
             {{s}}
           </mat-option>
@@ -30,8 +27,8 @@
     </div>
 
     <div mat-dialog-actions>
-      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
-      <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn">Cancel</button>
-    </div>
+      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+        (click)="confirmAdd()">Save</button>
+      </div>
   </form>
 </div>

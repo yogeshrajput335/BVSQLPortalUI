@@ -1,0 +1,130 @@
+<div class="container mat-elevation-z8">
+
+    <mat-table #table [dataSource]="dataSource!" matSort class="mat-cell">
+
+        <ng-container matColumnDef="employeeName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Employee</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.employeeName}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="projectName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Project</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.projectName}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="weekEndingDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Week Ending Date</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.weekEndingDate | date :'longDate'}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="month">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Month</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.month}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="year">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Year</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.year}}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="createdDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Created Date</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.createdDate}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="createdBy">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Created By</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.createdBy}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="duration">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Duration</mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.duration}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+                <mat-chip-list aria-label="Fish selection">
+                    <mat-chip *ngIf="row.status!=='NEW' && row.status!=='APPROVED' && row.status!=='REJECTED'">No Status
+                    </mat-chip>
+                    <mat-chip *ngIf="row.status=='NEW'" color="accent" selected>New</mat-chip>
+                    <mat-chip *ngIf="row.status=='APPROVED'" color="primary" selected>Approved</mat-chip>
+                    <mat-chip *ngIf="row.status=='REJECTED'" color="warn" selected>Rejected</mat-chip>
+                </mat-chip-list>
+            </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <button mat-icon-button (click)="addNew()">
+                    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                </button>
+                <button mat-icon-button (click)="openSearchFilter()">
+                    <mat-icon aria-label="Example icon-button with a heart icon">search</mat-icon>
+                </button>
+                <button mat-icon-button (click)="exportexcel()">
+                    <mat-icon aria-label="Example icon-button with a heart icon">file_download</mat-icon>
+                </button>
+                <button mat-icon-button (click)="onSearchFilter('')">
+                    <mat-icon aria-label="Example icon-button with a heart icon">refresh</mat-icon>
+                </button>
+
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row; let i=index;">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item
+                        (click)="startEdit(i, row.id, row.employeeId, row.projectId, row.weekEndingDate,row.month, row.year, row.createdDate,row.createdBy,row.duration, row.status)">
+                        <span>Edit</span>
+                    </button>
+
+                    <button mat-menu-item (click)="deleteItem(i, row.id, row.employeeId)">
+                        <span>Delete</span>
+                    </button>
+                    <button mat-menu-item (click)="generateTimesheet(i, row.id)">
+                        <span>Show Timesheet</span>
+                    </button>
+                </mat-menu>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+
+    <div class="no-results" [style.display]="dataSource?.renderedData?.length == 0 ? '' : 'none'">
+        No results
+    </div>
+    <mat-paginator #paginator [length]="dataSource?.filteredData != null ? dataSource?.filteredData!.length :0"
+        [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+</div>
+
+<ng-template let-bottomSheetRef="bottomSheetRef" #templateBottomSheet>
+    <button mat-raised-button (click)="closeSearchFilter()" color="warn" class="cancelBtn">X</button>
+    <mat-form-field appearance="outline">
+        <mat-label>Search</mat-label>
+        <input matInput #filter>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="onSearchFilter(filter.value)">Search</button><br />
+    <a href="javascript:;" (click)="onSearchFilter('')">Show all records</a>
+    <hr />
+    <div *ngIf="searchHistory.length==0">
+        No Search History
+    </div>
+    <div *ngIf="searchHistory.length>0" style="width:480px">
+        <div style="width:100%">
+            <label>Search History</label>
+            <a href="javascript:;" (click)="onClearSearchHistory()" *ngIf="searchHistory.length>0"
+                style="float:right">Clear Search History</a>
+        </div>
+        <mat-chip *ngFor="let item of searchHistory.reverse()" (click)="filter.value=item"
+            style="margin-right:4px">{{item}}</mat-chip>
+    </div>
+</ng-template>

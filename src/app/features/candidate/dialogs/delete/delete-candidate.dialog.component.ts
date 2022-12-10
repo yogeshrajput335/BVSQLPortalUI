@@ -2,7 +2,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 import {CandidateDataService} from '../../services/candidate-data.service';
 
-
 @Component({
   selector: 'app-delete-candidate.dialog',
   templateUrl: '../../dialogs/delete/delete-candidate.dialog.html',

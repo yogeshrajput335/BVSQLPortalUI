@@ -1,32 +1,31 @@
 import { Employee } from './../../employee/models/Employee';
 import { Project } from './../../project/models/Project';
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {ProjectAssignment} from '../models/ProjectAssignment';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { ProjectAssignment } from '../models/ProjectAssignment';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpCommonService } from 'src/app/core/services/httpCommon.service';
 
 @Injectable()
 export class ProjectAssignmentDataService {
-  projects=[{id:0,projectName:''}];
-  employees=[{id:0,firstName:'',lastName:''}];
+  projects = [{ id: 0, projectName: '' }];
+  employees = [{ id: 0, firstName: '', lastName: '' }];
   dataChange: BehaviorSubject<ProjectAssignment[]> = new BehaviorSubject<ProjectAssignment[]>([]);
-  // Temporarily stores data from dialogs
   dialogData: any;
 
-  constructor (private httpClient: HttpCommonService) {
-    this.httpClient.get('Project/GetProjects').subscribe((data:any) => {
+  constructor(private httpClient: HttpCommonService) {
+    this.httpClient.get('Project/GetProjects').subscribe((data: any) => {
       this.projects = data;
     },
-    (error: HttpErrorResponse) => {
-    console.log (error.name + ' ' + error.message);
-    });
-    this.httpClient.get('Employee/GetEmployee').subscribe((data:any) => {
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      });
+    this.httpClient.get('Employee/GetEmployee').subscribe((data: any) => {
       this.employees = data;
     },
-    (error: HttpErrorResponse) => {
-    console.log (error.name + ' ' + error.message);
-    });
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      });
 
   }
 
@@ -38,16 +37,15 @@ export class ProjectAssignmentDataService {
     return this.dialogData;
   }
 
-  /** CRUD METHODS */
   getAllProjectAssignments(): void {
-    this.httpClient.get('ProjectAssignment/GetProjectAssignment').subscribe((data:any) => {
-        this.dataChange.next(data);
-      },
+    this.httpClient.get('ProjectAssignment/GetProjectAssignment').subscribe((data: any) => {
+      this.dataChange.next(data);
+    },
       (error: HttpErrorResponse) => {
-      console.log (error.name + ' ' + error.message);
+        console.log(error.name + ' ' + error.message);
       });
   }
-  //Get Tree Data
+
   getAllProjectAssignmentTreeData() {
     return this.httpClient.get('ProjectAssignment/GetProjectEmpTree');
   }
@@ -61,51 +59,45 @@ export class ProjectAssignmentDataService {
     return this.httpClient.get('ProjectAssignment/GetEmployeeCount');
   }
 
-
-  // DEMO ONLY, you can find working methods below
-  addProjectAssignment (ProjectAssignment: ProjectAssignment): void {
+  addProjectAssignment(ProjectAssignment: ProjectAssignment): void {
     this.dialogData = ProjectAssignment;
-    let p = this.getProjects().filter(x=>x.id===ProjectAssignment.projectId)[0]
+    let p = this.getProjects().filter(x => x.id === ProjectAssignment.projectId)[0]
     ProjectAssignment.projectName = p.projectName;
-    let e = this.getEmployees().filter(x=>x.id===ProjectAssignment.employeeId)[0]
-    ProjectAssignment.employeeName = e.firstName +" " + e.lastName;
-
-    this.httpClient.post('ProjectAssignment/InsertProjectAssignment',ProjectAssignment).subscribe((data:any) => {
-      //this.dataChange.next(data);
+    let e = this.getEmployees().filter(x => x.id === ProjectAssignment.employeeId)[0]
+    ProjectAssignment.employeeName = e.firstName + " " + e.lastName;
+    this.httpClient.post('ProjectAssignment/InsertProjectAssignment', ProjectAssignment).subscribe((data: any) => {
     },
-    (error: HttpErrorResponse) => {
-    console.log (error.name + ' ' + error.message);
-    });
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      });
   }
 
-  updateProjectAssignment (ProjectAssignment: ProjectAssignment): void {
+  updateProjectAssignment(ProjectAssignment: ProjectAssignment): void {
     this.dialogData = ProjectAssignment;
-    let p = this.getProjects().filter(x=>x.id===ProjectAssignment.projectId)[0]
+    let p = this.getProjects().filter(x => x.id === ProjectAssignment.projectId)[0]
     ProjectAssignment.projectName = p.projectName;
-    let e = this.getEmployees().filter(x=>x.id===ProjectAssignment.employeeId)[0]
-    ProjectAssignment.employeeName = e.firstName +" " + e.lastName;
+    let e = this.getEmployees().filter(x => x.id === ProjectAssignment.employeeId)[0]
+    ProjectAssignment.employeeName = e.firstName + " " + e.lastName;
 
-    this.httpClient.put('ProjectAssignment/UpdateProjectAssignment',ProjectAssignment).subscribe((data:any) => {
-      //this.dataChange.next(data);
+    this.httpClient.put('ProjectAssignment/UpdateProjectAssignment', ProjectAssignment).subscribe((data: any) => {
     },
-    (error: HttpErrorResponse) => {
-    console.log (error.name + ' ' + error.message);
-    });
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      });
   }
 
-  deleteProjectAssignment (id: number): void {
-    this.httpClient.delete('ProjectAssignment/DeleteProjectAssignment/'+id).subscribe((data:any) => {
-      //this.dataChange.next(data);
+  deleteProjectAssignment(id: number): void {
+    this.httpClient.delete('ProjectAssignment/DeleteProjectAssignment/' + id).subscribe((data: any) => {
     },
-    (error: HttpErrorResponse) => {
-    console.log (error.name + ' ' + error.message);
-    });
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      });
   }
 
-  getProjects(){
+  getProjects() {
     return this.projects
   }
-  getEmployees(){
+  getEmployees() {
     return this.employees
   }
 }

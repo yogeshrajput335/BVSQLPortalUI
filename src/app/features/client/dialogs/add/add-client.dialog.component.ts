@@ -1,8 +1,8 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {ClientDataService} from '../../services/client-data.service';
-import {FormControl, Validators} from '@angular/forms';
-import {Client} from '../../models/Client';
+import { Component, Inject } from '@angular/core';
+import { ClientDataService } from '../../services/client-data.service';
+import { FormControl, Validators } from '@angular/forms';
+import { Client } from '../../models/Client';
 
 @Component({
   selector: 'app-add-client.dialog',
@@ -11,16 +11,15 @@ import {Client} from '../../models/Client';
 })
 
 export class AddClientDialogComponent {
-  statuses:any
+  statuses: any
   constructor(public dialogRef: MatDialogRef<AddClientDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Client,
-              public dataService: ClientDataService) {
-                this.statuses = this.dataService.getStatues()
-               }
+    @Inject(MAT_DIALOG_DATA) public data: Client,
+    public dataService: ClientDataService) {
+    this.statuses = this.dataService.getStatues()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -30,7 +29,7 @@ export class AddClientDialogComponent {
   }
 
   submit() {
-  // empty stuff
+    
   }
 
   onNoClick(): void {

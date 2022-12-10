@@ -5,7 +5,6 @@ import { HttpCommonService } from 'src/app/core/services/httpCommon.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
-
 @Component({
   selector: 'app-set-term.dialog',
   templateUrl: '../../dialogs/set-term/set-term.dialog.html',

@@ -1,94 +1,20 @@
-<div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="2:1">
-    <mat-grid-tile>
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            PIE CHART
-            <!-- {{card.title}} -->
-            <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu> -->
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <!-- <div> -->
-            <figure id="bar"></figure>
-            <!-- <google-chart [data]="pieChart"></google-chart> -->
-          <!-- </div> -->
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            TABLE CHART
-            <!-- {{card.title}} -->
-            <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu> -->
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>
-            <!-- <google-chart  [data]="tableChart"></google-chart> -->
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            BAR CHART
-            <!-- {{card.title}} -->
-            <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu> -->
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>
-            <!-- <google-chart  [data]="barChart"></google-chart> -->
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            HISTOGRAM
-            <!-- {{card.title}} -->
-            <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu> -->
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>
-            <!-- <google-chart  [data]="histogram"></google-chart> -->
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div class="charts-wrapper">
+  <div class="chart">
+    <app-visits-chart [visitsChartData]="visitsChartData$ | async"></app-visits-chart>
+  </div>
+  <div class="chart">
+    <app-performance-chart [performanceChartData]="performanceChartData$ | async"></app-performance-chart>
+  </div>
+  <div class="chart">
+    <app-server-chart [serverChartData]="serverChartData$ | async"></app-server-chart>
+  </div>
+  <div class="chart">
+    <app-revenue-chart [revenueCharData]="revenueChartData$ | async"></app-revenue-chart>
+  </div>
 </div>
+
+<!-- <app-daily-line-chart [dailyLineChartData]="dailyLineChartData$ | async"></app-daily-line-chart> -->
+
+<app-project-stat-chart [projectsStatsData]="projectsStatsData$ | async"></app-project-stat-chart>
+
+<!-- <app-support-requests [supportRequestData]="supportRequestData$ | async"></app-support-requests> -->

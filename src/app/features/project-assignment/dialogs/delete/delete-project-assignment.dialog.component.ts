@@ -2,7 +2,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 import { ProjectAssignmentDataService } from '../../services/project-assignment-data.service';
 
-
 @Component({
   selector: 'app-delete-project-assignment.dialog',
   templateUrl: '../../dialogs/delete/delete-project-assignment.dialog.html',

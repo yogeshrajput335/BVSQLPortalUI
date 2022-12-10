@@ -1,49 +1,79 @@
+<button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button>
 <div class="container">
-  <h3 mat-dialog-title>Add new candidate</h3>
+  <h3 mat-dialog-title>Add Candidate</h3>
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="date" [(ngModel)]="data.createdDate" name="createdDate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
+      <mat-datepicker #date></mat-datepicker>
+    </mat-form-field>
 
-    <!-- <div class="form">
-      <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="Id" [(ngModel)]="data.id" name="id" required >
+    <div class="example-container">
+      <mat-form-field appearance="outline">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First Name" [(ngModel)]="data.firstName" name="firstName" required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div> -->
 
-    <!--Textarea for demo purposes-->
-    <div class="form">
-      <mat-form-field color="accent">
-        <textarea matInput #input class="form-control" placeholder="First Name" [(ngModel)]="data.firstName" name="firstName" required ></textarea>
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput #inputstate class="form-control" placeholder="Last Name" [(ngModel)]="data.lastName"
+          name="lastName" maxlength="10" required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div>
 
-    <!--Contains mat-hint for characters count and has maxLengt set-->
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput #inputstate class="form-control" placeholder="Last Name" [(ngModel)]="data.lastName" name="lastName" maxlength="10" required >
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-        <!-- <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint> -->
+      <mat-form-field appearance="outline">
+        <mat-label>Technology</mat-label>
+        <input matInput placeholder="Technology" [(ngModel)]="data.technology" name="technology">
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput placeholder="Phone Number" [(ngModel)]="data.phoneNo" name="phoneNo">
+      <mat-form-field appearance="outline">
+        <mat-label>Visa</mat-label>
+        <input matInput placeholder="Visa" [(ngModel)]="data.visa" name="visa">
       </mat-form-field>
-    </div>
 
-
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput placeholder="Email" [(ngModel)]="data.email" name="email">
+      <mat-form-field appearance="outline">
+        <mat-label>Rate</mat-label>
+        <input matInput placeholder="Rate" [(ngModel)]="data.rate" name="rate">
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent">
+      <mat-form-field appearance="outline">
+        <mat-label>Client</mat-label>
+        <input matInput placeholder="Client" [(ngModel)]="data.client" name="client">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Contact</mat-label>
+        <input matInput placeholder="Contact" [(ngModel)]="data.clientContact" name="clientContact">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mail Id</mat-label>
+        <input matInput placeholder="Mail Id" [(ngModel)]="data.clientMail" name="clientMail">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Vendor Name</mat-label>
+        <input matInput placeholder="Vendor Name" [(ngModel)]="data.vendor" name="vendor">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Vendor Contact</mat-label>
+        <input matInput placeholder="Vendor Contact" [(ngModel)]="data.vendorContact" name="vendorContact">
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline">
+        <mat-label>Vendor Mail Id</mat-label>
+        <input matInput placeholder="Vendor Mail Id" [(ngModel)]="data.vendorMail" name="vendorMail">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
         <mat-label>Status</mat-label>
-        <mat-select [(ngModel)]="data.status" name="status"  color="accent" >
+        <mat-select [(ngModel)]="data.status" name="status" color="accent">
           <mat-option *ngFor="let s of statuses" [value]="s">
             {{s}}
           </mat-option>
@@ -52,7 +82,8 @@
     </div>
 
     <div mat-dialog-actions>
-      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
-      <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn">Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+        (click)="confirmAdd()">Save</button>
     </div>
   </form>
+  </div>

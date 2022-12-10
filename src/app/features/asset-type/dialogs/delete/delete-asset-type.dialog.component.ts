@@ -1,7 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { AssetTypeDataService } from '../../services/asset-type-data.service';
-
 
 @Component({
   selector: 'app-delete-asset-type.dialog',
@@ -11,7 +10,7 @@ import { AssetTypeDataService } from '../../services/asset-type-data.service';
 export class DeleteAssetTypeDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<DeleteAssetTypeDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: AssetTypeDataService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, public dataService: AssetTypeDataService) { }
 
   onNoClick(): void {
     this.dialogRef.close();

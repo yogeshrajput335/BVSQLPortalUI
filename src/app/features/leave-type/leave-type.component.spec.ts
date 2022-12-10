@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LeaveTypeComponent } from './leave-type.component';
 
 describe('LeaveTypeComponent', () => {

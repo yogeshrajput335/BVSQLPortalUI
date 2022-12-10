@@ -1,33 +1,12 @@
-.full-width-table {
-  width: 100%;
-}
-
-.mat-elevation-z8{
-  margin: 10px;
-  height: 394px;
-  overflow: auto;
-}
-.mat-elevation-z8-form{
-  padding:20px 50px;
-  margin: 10px;
-  height: 394px;
-  overflow: auto;
-  box-shadow: 0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-::ng-deep.mat-table {
-  height: 280px !important;
- }
-
-.fill-remaining-space {
+fill-remaining-space {
   float: right;
 }
+
 .mat-chip {
   font-size: 11px;
   font-weight: 500;
 }
+
 .mat-standard-chip {
 min-height: 20px;
 }
@@ -37,13 +16,26 @@ min-height: 20px;
   height: 25px;
   line-height: 25px;
 }
+
 .mat-header-row{
-  background-color: rgb(241 243 244);
+  background-color: rgb(241 243 244)
 }
+
 .mat-header-cell {
   color: #505050;
   font-size: 14px;
 }
-.example-container .mat-form-field {
-  margin-left: 8px;
+
+.form{
+  height: 40px;
+  width:100%;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto !important;
+}
+
+.cancelBtn{
+  float: right;
+  min-width: 38px !important;
 }

@@ -2,7 +2,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 import {ClientDataService} from '../../services/client-data.service';
 
-
 @Component({
   selector: 'app-delete-client.dialog',
   templateUrl: '../../dialogs/delete/delete-client.dialog.html',

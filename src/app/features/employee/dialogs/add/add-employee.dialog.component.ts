@@ -1,8 +1,8 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {EmployeeDataService} from '../../services/employee-data.service';
-import {FormControl, Validators} from '@angular/forms';
-import {Employee} from '../../models/Employee';
+import { Component, Inject } from '@angular/core';
+import { EmployeeDataService } from '../../services/employee-data.service';
+import { FormControl, Validators } from '@angular/forms';
+import { Employee } from '../../models/Employee';
 
 @Component({
   selector: 'app-add-employee.dialog',
@@ -11,18 +11,17 @@ import {Employee} from '../../models/Employee';
 })
 
 export class AddEmployeeDialogComponent {
-  statuses:any
-  empTypes:any
+  statuses: any
+  empTypes: any
   constructor(public dialogRef: MatDialogRef<AddEmployeeDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Employee,
-              public dataService: EmployeeDataService) {
-                this.statuses = this.dataService.getStatues()
-                this.empTypes = this.dataService.getEmployeeTypes()
-               }
+    @Inject(MAT_DIALOG_DATA) public data: Employee,
+    public dataService: EmployeeDataService) {
+    this.statuses = this.dataService.getStatues()
+    this.empTypes = this.dataService.getEmployeeTypes()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -32,7 +31,7 @@ export class AddEmployeeDialogComponent {
   }
 
   submit() {
-  // empty stuff
+   
   }
 
   onNoClick(): void {

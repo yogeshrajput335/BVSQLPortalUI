@@ -2,7 +2,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 import { LeaveDataService } from '../../services/leave-data.service';
 
-
 @Component({
   selector: 'app-delete-leave.dialog',
   templateUrl: '../../dialogs/delete/delete-leave.dialog.html',

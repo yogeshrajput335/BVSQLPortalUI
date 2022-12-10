@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { LeaveDataService } from '../../services/leave-data.service';
 
 @Component({
@@ -9,19 +9,18 @@ import { LeaveDataService } from '../../services/leave-data.service';
   styleUrls: ['../../dialogs/edit/edit-leave.dialog.css']
 })
 export class EditLeaveDialogComponent {
-  statuses:any
-  leaveTypes:any
-  employees:any
+  statuses: any
+  leaveTypes: any
+  employees: any
   constructor(public dialogRef: MatDialogRef<EditLeaveDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: LeaveDataService) {
-                this.statuses = this.dataService.getStatues()
-                this.leaveTypes = this.dataService.getLeaveTypes()
-                this.employees = this.dataService.getEmployees()
-              }
+    @Inject(MAT_DIALOG_DATA) public data: any, public dataService: LeaveDataService) {
+    this.statuses = this.dataService.getStatues()
+    this.leaveTypes = this.dataService.getLeaveTypes()
+    this.employees = this.dataService.getEmployees()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -31,7 +30,7 @@ export class EditLeaveDialogComponent {
   }
 
   submit() {
-    // emppty stuff
+ 
   }
 
   onNoClick(): void {

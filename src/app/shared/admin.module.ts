@@ -46,10 +46,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+
 import { ProfileComponent } from '../features/profile/profile.component';
 import { GlobalSettingsComponent } from '../features/global-settings/global-settings.component';
 import { OrganizationalStructureComponent } from '../features/organizational-structure/organizational-structure.component';
-//import { LeaveComponent } from '../features/leave/leave.component';
 import { HolidayComponent } from '../features/holiday/holiday.component';
 import { ReferenceComponent } from '../features/reference/reference.component';
 import { JobsComponent } from '../features/jobs/jobs.component';
@@ -59,7 +60,7 @@ import { AssetAllocationComponent } from '../features/asset-allocation/asset-all
 import { CandidateComponent } from '../features/candidate/candidate.component';
 import { ProjectAssignmentComponent } from '../features/project-assignment/project-assignment.component';
 import { TimesheetDetailComponent } from '../features/timesheet-detail/timesheet-detail.component';
-import { TimesheetApprovalComponent } from '../features/timesheet-approval/timesheet-approval.component';
+import { TimesheetListComponent } from '../features/timesheet-list/timesheet-list.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AddAssetDialogComponent } from '../features/asset/dialogs/add/add-asset.dialog.component';
 import { DeleteAssetDialogComponent } from '../features/asset/dialogs/delete/delete-asset.dialog.component';
@@ -99,7 +100,6 @@ import { ProjectDataService } from '../features/project/services/project-data.se
 import { AddProjectDialogComponent } from '../features/project/dialogs/add/add-project.dialog.component';
 import { DeleteProjectDialogComponent } from '../features/project/dialogs/delete/delete-project.dialog.component';
 import { EditProjectDialogComponent } from '../features/project/dialogs/edit/edit-project.dialog.component';
-
 import { DeleteProjectAssignmentDialogComponent } from '../features/project-assignment/dialogs/delete/delete-project-assignment.dialog.component';
 import { EditProjectAssignmentDialogComponent } from '../features/project-assignment/dialogs/edit/edit-project-assignment.dialog.component';
 import { ProjectAssignmentDataService } from '../features/project-assignment/services/project-assignment-data.service';
@@ -107,10 +107,7 @@ import { ProjectAssignmentDataSource } from '../features/project-assignment/proj
 import { AddProjectAssignmentDialogComponent } from '../features/project-assignment/dialogs/add/add-project-assignmnet.dialog.component';
 import { JobsDialogComponent } from '../features/jobs/jobs-dialog/jobs-dialog.component';
 import { JobsDataService } from '../features/jobs/jobs-data.service';
-
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
-
-
 import { InvoiceDetailsDataService } from '../features/invoice_details/services/invoice-details-data.service';
 import { AddInvoiceDetailsDialogComponent } from '../features/invoice_details/dialogs/add/add-invoice-details.dialog.component';
 import { DeleteInvoiceDetailsDialogComponent } from '../features/invoice_details/dialogs/delete/delete-invoice_details.dialog.component';
@@ -119,7 +116,21 @@ import { InvoiceDetailsComponent } from '../features/invoice_details/invoice-det
 import { SetTermClientDialogComponent } from '../features/client/dialogs/set-term/set-term.dialog.component';
 import { InvoiceDialogComponent } from '../features/invoice_details/dialogs/invoice-dialog/invoice-dialog.dialog.component';
 import { SetClientPerHourDialogComponent } from '../features/employee/dialogs/set-ClientPerHour/set-clientperhour.dialog.component';
-
+import { TimesheetListDataService } from '../features/timesheet-list/services/timesheet-list-data.service';
+import { TimesheetListDataSource } from '../features/timesheet-list/timesheet-list-datasource';
+import { AddTimesheetListDialogComponent } from '../features/timesheet-list/dialogs/add/add-timesheet-list.dialog.component';
+import { DeleteTimesheetListDialogComponent } from '../features/timesheet-list/dialogs/delete/delete-timesheet-list.dialog.component';
+import { EditTimesheetListDialogComponent } from '../features/timesheet-list/dialogs/edit/edit-timesheet-list.dialog.component';
+import { VisitsChartComponent } from '../features/dashboard/components/visits-chart/visits-chart.component';
+import { TrendModule } from 'ngx-trend';
+import { PerformanceChartComponent } from '../features/dashboard/components/performance-chart/performance-chart.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { RevenueChartComponent } from '../features/dashboard/components/revenue-chart/revenue-chart.component';
+import { ServerChartComponent } from '../features/dashboard/components/server-chart/server-chart.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { ProjectStatChartComponent } from '../features/dashboard/components/project-stat-chart/project-stat-chart.component';
+import { TimesheetDialogComponent } from '../features/timesheet-list/dialogs/timesheet-dialog/timesheet-dialog.dialog.component';
+// import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [DashboardComponent, UsersComponent, LeaveTypeComponent ,AdminComponent,NavComponent
@@ -138,14 +149,13 @@ import { SetClientPerHourDialogComponent } from '../features/employee/dialogs/se
   OrganizationalStructureComponent,
   LeaveComponent,
   HolidayComponent,
-AssetComponent,
+  AssetComponent,
   ProjectComponent,
   AssetTypeComponent,
   AssetAllocationComponent,
   CandidateComponent,
   ProjectAssignmentComponent,
   TimesheetDetailComponent,
-  TimesheetApprovalComponent,
   AddAssetDialogComponent,
   DeleteAssetDialogComponent,
   EditAssetDialogComponent,
@@ -185,7 +195,17 @@ AssetComponent,
   EditInvoiceDetailsDialogComponent,
   SetTermClientDialogComponent,
   InvoiceDialogComponent,
-  SetClientPerHourDialogComponent
+  TimesheetDialogComponent,
+  SetClientPerHourDialogComponent,
+  AddTimesheetListDialogComponent,
+  DeleteTimesheetListDialogComponent,
+  EditTimesheetListDialogComponent,
+  TimesheetListComponent,
+  VisitsChartComponent,
+  PerformanceChartComponent,
+  RevenueChartComponent,
+  ServerChartComponent,
+  ProjectStatChartComponent
 ],
   imports: [
     CommonModule,
@@ -217,10 +237,16 @@ AssetComponent,
     MatTabsModule,
     MatTreeModule,
     MatCheckboxModule,
-    Ng2GoogleChartsModule
+    Ng2GoogleChartsModule,
+    MatBottomSheetModule,
+    MatChipsModule,
+    MatProgressBarModule,
+    TrendModule,
+    NgApexchartsModule,
+    //NgxEchartsModule
   ],
   providers: [UserDataService,LeaveTypeDataService,ClientDataService,AssetDataService,AssetTypeDataService,
     EmployeeDataService, AssetAllocationDataService, LeaveDataService, HolidayDataService,ReferenceDataService, CandidateDataService,ProjectDataService,
-  ProjectAssignmentDataService, JobsDataService, InvoiceDetailsDataService]
+  ProjectAssignmentDataService, JobsDataService, InvoiceDetailsDataService,TimesheetListDataService]
 })
 export class AdminModule { }

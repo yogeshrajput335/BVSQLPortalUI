@@ -1,10 +1,10 @@
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {Employee} from './models/Employee';
-import {DataSource} from '@angular/cdk/collections';
-import {BehaviorSubject, merge, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {EmployeeDataService} from './services/employee-data.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { Employee } from './models/Employee';
+import { DataSource } from '@angular/cdk/collections';
+import { BehaviorSubject, merge, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { EmployeeDataService } from './services/employee-data.service';
 
 export class EmployeeDataSource extends DataSource<Employee> {
   _filterChange = new BehaviorSubject('');
@@ -21,17 +21,14 @@ export class EmployeeDataSource extends DataSource<Employee> {
   renderedData: Employee[] = [];
 
   constructor(public _exampleDatabase: EmployeeDataService,
-              public _paginator: MatPaginator,
-              public _sort: MatSort) {
+    public _paginator: MatPaginator,
+    public _sort: MatSort) {
     super();
-    // Reset to the first page when the user changes the filter.
     this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
     this._exampleDatabase.getAllEmployee();
   }
 
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Employee[]> {
-    // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
       this._sort.sortChange,
@@ -41,29 +38,23 @@ export class EmployeeDataSource extends DataSource<Employee> {
 
     this._exampleDatabase.getAllEmployee();
 
+    return merge(...displayDataChanges).pipe(map(() => {
+      this.filteredData = this._exampleDatabase.data.slice().filter((issue: Employee) => {
+        const searchStr = (issue.id + issue.firstName + issue.lastName + issue.phoneNumber + issue.email).toLowerCase();
+        return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+      });
 
-    return merge(...displayDataChanges).pipe(map( () => {
-        // Filter data
-        this.filteredData = this._exampleDatabase.data.slice().filter((issue: Employee) => {
-          const searchStr = (issue.id + issue.firstName + issue.lastName + issue.phoneNumber + issue.email).toLowerCase();
-          return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
-        });
+      const sortedData = this.sortData(this.filteredData.slice());
 
-        // Sort filtered data
-        const sortedData = this.sortData(this.filteredData.slice());
-
-        // Grab the page's slice of the filtered sorted data.
-        const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-        this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
-        return this.renderedData;
-      }
+      const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+      this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
+      return this.renderedData;
+    }
     ));
   }
 
-  disconnect() {}
+  disconnect() { }
 
-
-  /** Returns a sorted copy of the database data. */
   sortData(data: Employee[]): Employee[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;

@@ -1,8 +1,8 @@
 import { Project } from './../../../project/models/Project';
-import { Employee} from './../../../employee/models/Employee';
+import { Employee } from './../../../employee/models/Employee';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ProjectAssignment } from '../../models/ProjectAssignment';
 import { ProjectAssignmentDataService } from '../../services/project-assignment-data.service';
 
@@ -13,18 +13,17 @@ import { ProjectAssignmentDataService } from '../../services/project-assignment-
 })
 
 export class AddProjectAssignmentDialogComponent {
-  projects:any
-  employees:any
+  projects: any
+  employees: any
   constructor(public dialogRef: MatDialogRef<AddProjectAssignmentDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: ProjectAssignment,
-              public dataService: ProjectAssignmentDataService) {
-                this.projects = this.dataService.getProjects()
-                this.employees = this.dataService.getEmployees()
-               }
+    @Inject(MAT_DIALOG_DATA) public data: ProjectAssignment,
+    public dataService: ProjectAssignmentDataService) {
+    this.projects = this.dataService.getProjects()
+    this.employees = this.dataService.getEmployees()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -34,7 +33,7 @@ export class AddProjectAssignmentDialogComponent {
   }
 
   submit() {
-  // empty stuff
+   
   }
 
   onNoClick(): void {

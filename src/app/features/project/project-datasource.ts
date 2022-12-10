@@ -24,14 +24,12 @@ export class ProjectDataSource extends DataSource<Project> {
               public _paginator: MatPaginator,
               public _sort: MatSort) {
     super();
-    // Reset to the first page when the user changes the filter.
+   
     this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
     this._exampleDatabase.getAllProjects();
   }
 
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
   connect(): Observable<Project[]> {
-    // Listen for any changes in the base data, sorting, filtering, or pagination
     const displayDataChanges = [
       this._exampleDatabase.dataChange,
       this._sort.sortChange,
@@ -43,16 +41,13 @@ export class ProjectDataSource extends DataSource<Project> {
 
 
     return merge(...displayDataChanges).pipe(map( () => {
-        // Filter data
         this.filteredData = this._exampleDatabase.data.slice().filter((issue: Project) => {
           const searchStr = (issue.id + issue.projectName + issue.clientId).toLowerCase();
           return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
         });
 
-        // Sort filtered data
         const sortedData = this.sortData(this.filteredData.slice());
 
-        // Grab the page's slice of the filtered sorted data.
         const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
         this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
         return this.renderedData;
@@ -62,8 +57,6 @@ export class ProjectDataSource extends DataSource<Project> {
 
   disconnect() {}
 
-
-  /** Returns a sorted copy of the database data. */
   sortData(data: Project[]): Project[] {
     if (!this._sort.active || this._sort.direction === '') {
       return data;
@@ -78,8 +71,6 @@ export class ProjectDataSource extends DataSource<Project> {
         case 'projectName': [propertyA, propertyB] = [a.projectName, b.projectName]; break;
         case 'clientId': [propertyA, propertyB] = [a.clientId, b.clientId]; break;
         case 'description': [propertyA, propertyB] = [a.description, b.description]; break;
-        // case 'toDate': [propertyA, propertyB] = [a.toDate.toString(), b.toDate.toString()]; break;
-        // case 'fromDate': [propertyA, propertyB] = [a.fromDate.toString(), b.fromDate.toString()]; break;
         case 'projectType': [propertyA, propertyB] = [a.projectType, b.projectType]; break;
         case 'status': [propertyA, propertyB] = [a.status, b.status]; break;
     }

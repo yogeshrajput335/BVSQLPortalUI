@@ -15,6 +15,10 @@ import { TableComponent } from './samples/table/table.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './core/store/counter.reducers';
+import { JwtModule } from '@auth0/angular-jwt';
+import { tokenGetter } from './shared/login.module';
 
 
 @NgModule({
@@ -26,6 +30,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     ],
   imports: [
     AppRoutingModule,
+    BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MatTableModule,
@@ -33,9 +38,17 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatSortModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
-    MatNativeDateModule ,
+    MatNativeDateModule,
+    StoreModule.forRoot({ count: counterReducer }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:7037"],
+        disallowedRoutes: []
+      }
+    })
   ],
-  providers: [AuthenticationInterceptor],
+  //providers: [AuthenticationInterceptor],
 
   bootstrap: [AppComponent]
 })

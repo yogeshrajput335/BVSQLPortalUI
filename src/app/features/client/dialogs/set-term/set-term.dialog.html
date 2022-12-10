@@ -1,7 +1,9 @@
 <div class="container">
+  
   <div mat-dialog-content>
     Client: {{data.clientName}} <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button>
     <p></p>
+    
     <div class="example-container">
       <mat-form-field appearance="outline">
         <mat-label>Client</mat-label>
@@ -11,6 +13,7 @@
           <mat-option value="45">45d</mat-option>
         </mat-select>
       </mat-form-field>
+      
       <mat-form-field appearance="outline">
         <mat-label>Reason For Change</mat-label>
         <textarea matInput #input class="form-control" [(ngModel)]="reasonForChange" name="reasonForChange" ></textarea>
@@ -19,6 +22,7 @@
       </div>
   </div>
   <br>
+  
   <table id="termTable">
     <tr>
     <th>Change Date</th>
@@ -27,6 +31,7 @@
     <th>Change By</th>
     <th>Reason For Change</th>
     </tr>
+    
     <tr *ngFor="let item of termHistory">
       <td>{{item.changeDate | date :'longDate'}}</td>
       <td>{{item.oldTermText}}</td>
@@ -34,6 +39,7 @@
       <td>{{item.changeBy}}</td>
       <td>{{item.reasonForChange}}</td>
     </tr>
+    
     <tr *ngIf="termHistory.length==0">
       <td colspan="5">
         No Term History

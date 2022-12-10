@@ -1,0 +1,71 @@
+<div class="container">
+
+<div class="invoice-box-header">
+  <button (click)="print()" mat-raised-button>GENERATE PDF</button>
+  <button (click)="onNoClick()" mat-raised-button class="nextbutton">Close</button>
+  <!-- <button (click)="email()" mat-raised-button class="nextbutton">PREVIEW</button>
+  <button (click)="email()" mat-raised-button class="nextbutton">SEND FOR APPROVAL</button>
+  <button (click)="email()" mat-raised-button class="nextbutton">VIEW OLD INVOICES</button> -->
+</div>
+<div class="invoice-box" id="html2Pdf" #html2Pdf>
+
+  <table cellpadding="0" cellspacing="0">
+    <tr class="top">
+      <td colspan="7">
+        <table>
+          <tr>
+            <td class="title" colspan="5">
+              <img src="../../../assets/blueverse_logo_live.png" style="width: 100%; max-width: 100px" />
+            </td>
+
+            <td colspan="2" style="text-align: right;">
+              Year: {{timesheet.year}}<br />
+              Month : {{timesheet.month}}<br />
+              Week: {{timesheet.duration}}<br />
+              Today Date: {{today| date :'dd/MM/YYYY'}}<br />
+              Created On: {{timesheet.createdDate| date :'dd/MM/YYYY'}}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr class="heading">
+      <td>Employee</td>
+      <td>Client</td>
+      <td>Project</td>
+
+      <td colspan="4" style="text-align: right;">Timesheet Duration</td>
+    </tr>
+
+    <tr class="details">
+      <td>{{timesheet.employeeName}}</td>
+      <td>{{timesheet.clientName}}</td>
+      <td>{{timesheet.projectName}}</td>
+      <td colspan="4" style="text-align: right;">{{timesheet.duration}}</td>
+    </tr>
+    <tr>
+      <td colspan="7">
+        <table>
+          <tr class="heading">
+            <td *ngFor="let item of timesheet.detail">{{item.workDay| date :'dd/MM/yyyy'}}</td>
+          </tr>
+          <tr class="heading">
+            <td *ngFor="let item of timesheet.detail">{{item.workDay| date :'EEEE'}}</td>
+          </tr>
+
+          <tr class="item last">
+            <td *ngFor="let item of timesheet.detail" style="text-align: center;background-color: beige;">{{item.hours}}</td>
+          </tr>
+
+          <tr class="total">
+            <td colspan="7" style="text-align: right;">Total hours: <strong>{{totalHours}} Hours</strong></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+  </table>
+</div>
+</div>
+

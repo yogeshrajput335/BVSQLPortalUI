@@ -1,61 +1,52 @@
+<button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button>
 <div class="container">
-  <!-- <h3 mat-dialog-title>Leave Type id: {{data.id}}</h3> -->
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
-
-    <div class="form">
-      <mat-form-field color="accent">
+    
+    <div class="example-container">
+      <mat-form-field appearance="outline">
         <mat-label>Employee</mat-label>
-        <mat-select [(ngModel)]="data.employeeId" name="employeeId"  color="accent" >
+        <mat-select [(ngModel)]="data.employeeId" name="employeeId" color="accent">
           <mat-option *ngFor="let s of employees" [value]="s.id">
             {{s.firstName+" "+s.lastName }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent">
+      <mat-form-field appearance="outline">
         <mat-label>Leave Type</mat-label>
-        <mat-select [(ngModel)]="data.leaveTypeId" name="leaveTypeId"  color="accent" >
+        <mat-select [(ngModel)]="data.leaveTypeId" name="leaveTypeId" color="accent">
           <mat-option *ngFor="let s of leaveTypes" [value]="s.id">
             {{s.type}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent" appearance="fill"  >
+      <mat-form-field appearance="outline">
         <mat-label>Choose a from date</mat-label>
         <input matInput [matDatepicker]="fromDate" [(ngModel)]="data.fromDate" name="fromDate">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
         <mat-datepicker #fromDate></mat-datepicker>
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent" appearance="fill"  >
+      <mat-form-field appearance="outline">
         <mat-label>Choose a to date</mat-label>
         <input matInput [matDatepicker]="toDate" [(ngModel)]="data.toDate" name="toDate">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
         <mat-datepicker #toDate></mat-datepicker>
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent">
-        <textarea matInput #input class="form-control" placeholder="Reason" [(ngModel)]="data.reason" name="reason" ></textarea>
+      <mat-form-field appearance="outline">
+        <mat-label>Reason</mat-label>
+        <textarea matInput #input class="form-control" placeholder="Reason" [(ngModel)]="data.reason"
+          name="reason"></textarea>
       </mat-form-field>
-    </div>
 
-
-    <div class="form">
-      <mat-form-field color="accent">
+      <mat-form-field appearance="outline">
         <mat-label>Status</mat-label>
-        <mat-select [(ngModel)]="data.status" name="status"  color="accent" >
+        <mat-select [(ngModel)]="data.status" name="status" color="accent">
           <mat-option *ngFor="let s of statuses" [value]="s">
             {{s}}
           </mat-option>
@@ -64,8 +55,8 @@
     </div>
 
     <div mat-dialog-actions>
-      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
-      <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn">Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+        (click)="stopEdit()">Save</button>
     </div>
   </form>
 </div>

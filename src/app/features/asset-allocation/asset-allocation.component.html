@@ -1,18 +1,6 @@
 <div class="mat-elevation-z8">
 
-  <div class="form">
-    <span style="font-size: 20px;margin-left:20px">Asset Allocation</span>
-    <span class="spacer"></span>
-    <mat-form-field floatPlaceholder="never" color="accent" style="margin-left: 50px;">
-      <input matInput #filter placeholder="Filter asset allocation">
-    </mat-form-field>
-    <button mat-icon-button (click)="refresh()" style="float: right;">
-      <mat-icon>refresh</mat-icon>
-    </button>
-  </div>
-
   <mat-table #table [dataSource]="dataSource!" matSort class="mat-cell">
-    ng update @angular/cli @angular/core
 
     <ng-container matColumnDef="assetName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Asset Name</mat-header-cell>
@@ -36,7 +24,7 @@
 
     <ng-container matColumnDef="returnDate">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Return Date</mat-header-cell>
-      <mat-cell *matCellDef="let row" > {{row.returnDate!==null?(row.returnDate  | date :'longDate'):'--'}}</mat-cell>
+      <mat-cell *matCellDef="let row"> {{row.returnDate!==null?(row.returnDate | date :'longDate'):'--'}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status">
@@ -45,28 +33,42 @@
         <mat-chip-list aria-label="Fish selection">
           <mat-chip *ngIf="row.status!=='ALLOCATED' && row.status!=='RETURNED'">No Status</mat-chip>
           <mat-chip *ngIf="row.status=='ALLOCATED'" color="primary" selected>Allocated</mat-chip>
-          <mat-chip  *ngIf="row.status=='RETURNED'"color="warn" selected>Returned</mat-chip>
+          <mat-chip *ngIf="row.status=='RETURNED'" color="warn" selected>Returned</mat-chip>
         </mat-chip-list>
       </mat-cell>
     </ng-container>
 
-    <!-- actions -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button  (click)="addNew()" >
+        <button mat-icon-button (click)="addNew()">
           <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
-          <!-- <span>Create New User</span> -->
+        </button>
+        <button mat-icon-button (click)="openSearchFilter()">
+          <mat-icon aria-label="Example icon-button with a heart icon">search</mat-icon>
+        </button>
+        <button mat-icon-button (click)="exportexcel()">
+          <mat-icon aria-label="Example icon-button with a heart icon">file_download</mat-icon>
+        </button>
+        <button mat-icon-button (click)="onSearchFilter('')">
+          <mat-icon aria-label="Example icon-button with a heart icon">refresh</mat-icon>
         </button>
       </mat-header-cell>
 
       <mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button color="primary" (click)="startEdit(i, row.id, row.assetId ,row.allocatedById, row.allocatedToId,(row.allocatedDate!=='0001-01-01T00:00:00' ?row.allocatedDate:null), (row.returnDate!=='0001-01-01T00:00:00' ?row.returnDate:null), row.status)">
-          <mat-icon aria-label="Edit">edit</mat-icon>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
         </button>
 
-        <button mat-icon-button color="warn" (click)="deleteItem(i, row.id, row.assetName, row.allocatedTo)">
-          <mat-icon aria-label="Delete">delete</mat-icon>
-        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item
+            (click)="startEdit(i, row.id, row.assetId ,row.allocatedById, row.allocatedToId,(row.allocatedDate!=='0001-01-01T00:00:00' ?row.allocatedDate:null), (row.returnDate!=='0001-01-01T00:00:00' ?row.returnDate:null), row.status)">
+            <span>Edit</span>
+          </button>
+
+          <button mat-menu-item (click)="deleteItem(i, row.id, row.assetName, row.allocatedTo)">
+            <span>Delete</span>
+          </button>
+        </mat-menu>
       </mat-cell>
     </ng-container>
 
@@ -74,15 +76,33 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
-
   <div class="no-results" [style.display]="dataSource?.renderedData?.length == 0 ? '' : 'none'">
     No results
   </div>
 
-  <mat-paginator #paginator
-                 [length]="dataSource?.filteredData != null ? dataSource?.filteredData!.length :0"
-                 [pageIndex]="0"
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 25, 100]">
+  <mat-paginator #paginator [length]="dataSource?.filteredData != null ? dataSource?.filteredData!.length :0"
+    [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
   </mat-paginator>
 </div>
+<ng-template let-bottomSheetRef="bottomSheetRef" #templateBottomSheet>
+  <button mat-raised-button (click)="closeSearchFilter()" color="warn" class="cancelBtn">X</button>
+  <mat-form-field appearance="outline">
+    <mat-label>Search</mat-label>
+    <input matInput #filter>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onSearchFilter(filter.value)">Search</button><br />
+  <a href="javascript:;" (click)="onSearchFilter('')">Show all records</a>
+  <hr />
+  <div *ngIf="searchHistory.length==0">
+    No Search History
+  </div>
+  <div *ngIf="searchHistory.length>0" style="width:480px">
+    <div style="width:100%">
+      <label>Search History</label>
+      <a href="javascript:;" (click)="onClearSearchHistory()" *ngIf="searchHistory.length>0" style="float:right">Clear
+        Search History</a>
+    </div>
+    <mat-chip *ngFor="let item of searchHistory.reverse()" (click)="filter.value=item"
+      style="margin-right:4px">{{item}}</mat-chip>
+  </div>
+</ng-template>

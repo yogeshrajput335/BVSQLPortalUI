@@ -2,7 +2,6 @@ import { InvoicesComponent } from './../features/invoices/invoices.component';
 import { HolidayComponent } from './../features/holiday/holiday.component';
 import { CandidateComponent } from './../features/candidate/candidate.component';
 import { ReferenceComponent } from './../features/reference/reference.component';
-import { TimesheetApprovalComponent } from './../features/timesheet-approval/timesheet-approval.component';
 import { TimesheetDetailComponent } from './../features/timesheet-detail/timesheet-detail.component';
 import { ProjectAssignmentComponent } from './../features/project-assignment/project-assignment.component';
 import { AssetAllocationComponent } from './../features/asset-allocation/asset-allocation.component';
@@ -24,6 +23,7 @@ import { ProjectComponent } from '../features/project/project.component';
 import { AssetComponent } from '../features/asset/asset.component';
 import { EmployeeComponent } from '../features/employee/employee.component';
 import { InvoiceDetailsComponent } from '../features/invoice_details/invoice-details.component';
+import { TimesheetListComponent } from '../features/timesheet-list/timesheet-list.component';
 
 const routes: Routes = [
   {
@@ -49,11 +49,11 @@ const routes: Routes = [
       { path: "asset-allocation", component: AssetAllocationComponent },
       { path: "project-assignment", component: ProjectAssignmentComponent },
       { path: "timesheet-detail", component: TimesheetDetailComponent },
-      { path: "timesheet-approval", component: TimesheetApprovalComponent },
       { path: "holiday", component: HolidayComponent },
       { path: "employee", component: EmployeeComponent },
       { path: "invoice", component: InvoicesComponent },
       { path: "invoice-details", component: InvoiceDetailsComponent },
+      { path: "timesheet-list", component: TimesheetListComponent },
       { path: "", redirectTo: "dashboard", pathMatch: "full" },
     ],
   },

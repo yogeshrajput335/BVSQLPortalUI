@@ -1,24 +1,23 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {Client} from '../models/Client';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Client } from '../models/Client';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { HttpCommonService } from 'src/app/core/services/httpCommon.service';
 
 @Injectable()
 export class ClientDataService {
   statuses = ['ACTIVE', 'INACTIVE']
-  projects:any;
+  projects: any;
   dataChange: BehaviorSubject<Client[]> = new BehaviorSubject<Client[]>([]);
-  // Temporarily stores data from dialogs
   dialogData: any;
 
-  constructor (private httpClient: HttpCommonService) {
-    this.httpClient.get('Project/GetProjects').subscribe((data:any) => {
+  constructor(private httpClient: HttpCommonService) {
+    this.httpClient.get('Project/GetProjects').subscribe((data: any) => {
       this.projects = data;
     },
-    (error: HttpErrorResponse) => {
-    console.log (error.name + ' ' + error.message);
-    });
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      });
   }
 
   get data(): Client[] {
@@ -29,59 +28,55 @@ export class ClientDataService {
     return this.dialogData;
   }
 
-  /** CRUD METHODS */
   getAllClient(): void {
-    this.httpClient.get('Client/GetClient').subscribe((data:any) => {
-        this.dataChange.next(data);
-      },
+    this.httpClient.get('Client/GetClient').subscribe((data: any) => {
+      this.dataChange.next(data);
+    },
       (error: HttpErrorResponse) => {
-      console.log (error.name + ' ' + error.message);
+        console.log(error.name + ' ' + error.message);
       });
   }
 
-  // DEMO ONLY, you can find working methods below
-  addClient (client: Client): void {
+  addClient(client: Client): void {
     this.dialogData = client;
-    this.httpClient.post('Client/InsertClient',client).subscribe((data:any) => {
-      //this.dataChange.next(data);
+    this.httpClient.post('Client/InsertClient', client).subscribe((data: any) => {
     },
-    (error: HttpErrorResponse) => {
-    console.log (error.name + ' ' + error.message);
-    });
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      });
   }
 
-  updateClient (client: Client): void {
+  updateClient(client: Client): void {
     this.dialogData = client;
-    this.httpClient.put('Client/UpdateClient',client).subscribe((data:any) => {
-      //this.dataChange.next(data);
+    this.httpClient.put('Client/UpdateClient', client).subscribe((data: any) => {
     },
-    (error: HttpErrorResponse) => {
-    console.log (error.name + ' ' + error.message);
-    });
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      });
   }
 
-  deleteClient (id: number): void {
-    this.httpClient.delete('Client/DeleteClient/'+id).subscribe((data:any) => {
-      //this.dataChange.next(data);
+  deleteClient(id: number): void {
+    this.httpClient.delete('Client/DeleteClient/' + id).subscribe((data: any) => {
     },
-    (error: HttpErrorResponse) => {
-    console.log (error.name + ' ' + error.message);
-    });
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      });
   }
-  setTerm(id:number,term:number,reasonForChange:string, changeBy:number){
-    this.httpClient.post('Client/SetTerm/'+id+'/'+term,
-      {reasonForChange: reasonForChange, changeBy: changeBy}
-    ).subscribe((data:any) => {
-      //this.dataChange.next(data);
+  setTerm(id: number, term: number, reasonForChange: string, changeBy: number) {
+    this.httpClient.post('Client/SetTerm/' + id + '/' + term,
+      { reasonForChange: reasonForChange, changeBy: changeBy }
+    ).subscribe((data: any) => {
     },
-    (error: HttpErrorResponse) => {
-    console.log (error.name + ' ' + error.message);
-    });
+      (error: HttpErrorResponse) => {
+        console.log(error.name + ' ' + error.message);
+      });
   }
-  getStatues(){
+  
+  getStatues() {
     return this.statuses
   }
-  getProjects(){
+
+  getProjects() {
     return this.projects
   }
 }

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AssetTypeComponent } from './asset-type.component';
 
 describe('AssetTypeComponent', () => {

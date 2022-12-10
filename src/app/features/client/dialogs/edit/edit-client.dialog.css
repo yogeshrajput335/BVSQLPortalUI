@@ -17,3 +17,9 @@
   font-size: 16px;
   flex-grow: 1;
 }
+
+.cancelBtn{
+  float: right;
+  min-width: 38px !important;
+}
+

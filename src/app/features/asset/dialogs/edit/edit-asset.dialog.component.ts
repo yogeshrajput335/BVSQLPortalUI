@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { AssetDataService } from '../../services/asset-data.service';
 
 @Component({
@@ -9,17 +9,16 @@ import { AssetDataService } from '../../services/asset-data.service';
   styleUrls: ['../../dialogs/edit/edit-asset.dialog.css']
 })
 export class EditAssetDialogComponent {
-  statuses:any
-  assetTypes:any
+  statuses: any
+  assetTypes: any
   constructor(public dialogRef: MatDialogRef<EditAssetDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: AssetDataService) {
-                this.statuses = this.dataService.getStatues()
-                this.assetTypes = this.dataService.getAssetTypes()
-              }
+    @Inject(MAT_DIALOG_DATA) public data: any, public dataService: AssetDataService) {
+    this.statuses = this.dataService.getStatues()
+    this.assetTypes = this.dataService.getAssetTypes()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -29,7 +28,7 @@ export class EditAssetDialogComponent {
   }
 
   submit() {
-    // emppty stuff
+ 
   }
 
   onNoClick(): void {

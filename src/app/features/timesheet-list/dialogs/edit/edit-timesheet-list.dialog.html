@@ -1,0 +1,77 @@
+<button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button>
+<div class="container">
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <<div class="example-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Employee</mat-label>
+        <mat-select [(ngModel)]="data.employeeId" name="employeeId" color="accent" required>
+          <mat-option *ngFor="let s of employees" [value]="s.id">
+            {{s.firstName+' '+s.lastName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Project</mat-label>
+        <mat-select [(ngModel)]="data.projectId" name="projectId" color="accent">
+          <mat-option *ngFor="let s of projects" [value]="s.id">
+            {{s.projectName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Week Ending Date</mat-label>
+        <input matInput [matDatepicker]="weekEndingDate" [(ngModel)]="data.weekEndingDate" name="weekEndingDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="weekEndingDate"></mat-datepicker-toggle>
+        <mat-datepicker #weekEndingDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Month</mat-label>
+        <input matInput placeholder="Month" [(ngModel)]="data.month" name="month">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Year</mat-label>
+        <input matInput placeholder="Year" [(ngModel)]="data.year" name="year">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Created Date</mat-label>
+        <input matInput [matDatepicker]="createdDate" [(ngModel)]="data.createdDate" name="createdDate">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="createdDate"></mat-datepicker-toggle>
+        <mat-datepicker #createdDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Created By</mat-label>
+        <input matInput placeholder="Created By" [(ngModel)]="data.createdBy" name="createdBy">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Duration</mat-label>
+        <input matInput placeholder="Duration" [(ngModel)]="data.duration" name="duration">
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="data.status" name="status" color="accent">
+          <mat-option *ngFor="let s of statuses" [value]="s">
+            {{s}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+    (click)="stopEdit()">Save</button>
+</div>
+</form>
+</div>

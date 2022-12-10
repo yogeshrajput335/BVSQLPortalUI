@@ -1,7 +1,7 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {ReferenceDataService} from '../../services/reference-data.service';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { ReferenceDataService } from '../../services/reference-data.service';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-reference.dialog',
@@ -9,15 +9,14 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: ['../../dialogs/edit/edit-reference.dialog.css']
 })
 export class EditReferenceDialogComponent {
-  statuses:any
+  statuses: any
   constructor(public dialogRef: MatDialogRef<EditReferenceDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public dataService:ReferenceDataService) {
-                this.statuses = this.dataService.getStatues()
-              }
+    @Inject(MAT_DIALOG_DATA) public data: any, public dataService: ReferenceDataService) {
+    this.statuses = this.dataService.getStatues()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -27,7 +26,7 @@ export class EditReferenceDialogComponent {
   }
 
   submit() {
-    // emppty stuff
+    
   }
 
   onNoClick(): void {

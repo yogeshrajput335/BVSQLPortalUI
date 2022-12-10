@@ -1,0 +1,59 @@
+<button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button>
+<div class="container">
+  <h3 mat-dialog-title>Add Timesheet List</h3>
+
+  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+
+    <div class="example-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Employee</mat-label>
+        <mat-select [(ngModel)]="data.employeeId" name="employeeId" color="accent" required>
+          <mat-option *ngFor="let s of employees" [value]="s.id">
+            {{s.firstName+' '+s.lastName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Project</mat-label>
+        <mat-select [(ngModel)]="data.projectId" name="projectId" color="accent">
+          <mat-option *ngFor="let s of projects" [value]="s.id">
+            {{s.projectName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Week Ending Date</mat-label>
+        <input matInput [matDatepicker]="weekEndingDate" [(ngModel)]="data.weekEndingDate" name="weekEndingDate"
+          (dateChange)="onDateChange()">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="weekEndingDate"></mat-datepicker-toggle>
+        <mat-datepicker #weekEndingDate></mat-datepicker>
+      </mat-form-field>
+
+
+      <table *ngIf="data.weekEndingDate != null">
+        <tr>
+          <td *ngFor="let wd of WeekDates">{{wd | date :'shortDate'}}
+            <hr> ({{days[wd.getDay()]}})
+          </td>
+        </tr>
+        <tr>
+          <td *ngFor="let wd of WeekDates;let i = index">
+            <input type="text" *ngIf="wd.getDay()==0 || wd.getDay()==6" [readonly]="true" style="width:70px" [value]="0"
+              type="number" [(ngModel)]="ins_datas[i]" [ngModelOptions]="{standalone: true}" />
+            <input type="text" *ngIf="!(wd.getDay()==0 || wd.getDay()==6)" style="width:70px" type="number"
+              [(ngModel)]="ins_datas[i]" [ngModelOptions]="{standalone: true}" />
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+        (click)="confirmAdd()">Save</button>
+    </div>
+  </form>
+</div>

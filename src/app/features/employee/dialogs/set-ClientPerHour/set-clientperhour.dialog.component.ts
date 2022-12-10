@@ -5,7 +5,6 @@ import { HttpCommonService } from 'src/app/core/services/httpCommon.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 
-
 @Component({
   selector: 'app-set-clientperhour.dialog',
   templateUrl: '../../dialogs/set-clientperhour/set-clientperhour.dialog.html',
@@ -58,6 +57,7 @@ export class SetClientPerHourDialogComponent {
     console.log (error.name + ' ' + error.message);
     });
   }
+
   onClientChange(){
     this.clientPerHourHistory = this.clientPerHourHistoryInitial.filter((x:any)=>x.clientId == this.clientForHistory || this.clientForHistory===0|| this.clientForHistory==='0')
   }

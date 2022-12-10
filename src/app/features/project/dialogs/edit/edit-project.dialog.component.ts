@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ProjectDataService } from '../../services/project-data.service';
 
 @Component({
@@ -9,19 +9,18 @@ import { ProjectDataService } from '../../services/project-data.service';
   styleUrls: ['../../dialogs/edit/edit-project.dialog.css']
 })
 export class EditProjectDialogComponent {
-  statuses:any
-  projectTypes:any
-  clients:any
+  statuses: any
+  projectTypes: any
+  clients: any
   constructor(public dialogRef: MatDialogRef<EditProjectDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public dataService: ProjectDataService) {
-                this.statuses = this.dataService.getStatues()
-                this.projectTypes = this.dataService.getProjectTypes()
-                this.clients = this.dataService.getClients()
-              }
+    @Inject(MAT_DIALOG_DATA) public data: any, public dataService: ProjectDataService) {
+    this.statuses = this.dataService.getStatues()
+    this.projectTypes = this.dataService.getProjectTypes()
+    this.clients = this.dataService.getClients()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -31,7 +30,7 @@ export class EditProjectDialogComponent {
   }
 
   submit() {
-    // emppty stuff
+    
   }
 
   onNoClick(): void {

@@ -81,19 +81,20 @@ export class InvoiceDetailsDataService {
     let e = this.getClients().filter(x=>x.id===InvoiceDetails.clientId)[0]
     InvoiceDetails['clientName']= e.clientName;
     this.httpClient.post('Invoice/InsertInvoice',InvoiceDetails).subscribe((data:any) => {
-      //this.dataChange.next(data);
+      //this.getAllInvoiceDetails();
     },
     (error: HttpErrorResponse) => {
     console.log (error.name + ' ' + error.message);
     });
   }
 
-  updateInvoiceDetails (InvoiceDetails: InvoiceDetails): void {
+  updateInvoiceDetails (InvoiceDetails: InvoiceDetails, Products:any): void {
     this.dialogData = InvoiceDetails;
+    InvoiceDetails.products = Products;
     let e = this.getClients().filter(x=>x.id===InvoiceDetails.clientId)[0]
     InvoiceDetails.clientName = e.clientName;
     this.httpClient.put('Invoice/UpdateInvoice',InvoiceDetails).subscribe((data:any) => {
-      //this.dataChange.next(data);
+      //this.getAllInvoiceDetails();
     },
     (error: HttpErrorResponse) => {
     console.log (error.name + ' ' + error.message);
@@ -102,7 +103,7 @@ export class InvoiceDetailsDataService {
 
   deleteInvoiceDetails (id: number): void {
     this.httpClient.delete('Invoice/DeleteInvoiceProduct/'+id).subscribe((data:any) => {
-      //this.dataChange.next(data);
+      this.getAllInvoiceDetails();
     },
     (error: HttpErrorResponse) => {
     console.log (error.name + ' ' + error.message);

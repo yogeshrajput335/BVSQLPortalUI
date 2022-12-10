@@ -1,85 +1,80 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" fullscreen>
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [mode]="(isHandset$ | async) ? 'over' : 'over'"
       [opened]="(isHandset$ | async) === true">
-    <mat-divider></mat-divider>
-    <div class="matero-user-panel" fxLayout="column" fxLayoutAlign="center center" style="text-align: center">
-      <img class="matero-user-panel-avatar" src="../../../assets/blueverse_logo.png" alt="avatar" width="64" />
-      <h4 class="matero-user-panel-name">{{ user.username }}</h4>
-      <h5 class="matero-user-panel-email">{{ user.email }}</h5>
-      <div>
-        <mat-chip-list aria-label="Fish selection">
-          <mat-chip color="accent" selected>{{user.userType}}</mat-chip>
-        </mat-chip-list>
-      </div>
+    <!-- <mat-divider></mat-divider> -->
+    <div class="matero-user-panel" fxLayout="column" fxLayoutAlign="center center" style="text-align: center;background-color: #000000;">
+      <img src="../../../assets/blueverse_logo_white_yellow_wn_live.png" alt="avatar" width="100" />
+
+
       <div class="matero-user-panel-icons">
-        <a routerLink='profile' routerLinkActive="active" mat-icon-button>
+        <a routerLink='profile' routerLinkActive="active" mat-icon-button style="color: #FFD648;">
           <mat-icon class="icon-18">account_circle</mat-icon>
         </a>
-        <a routerLink='settings' routerLinkActive="active" mat-icon-button>
+        <a routerLink='settings' routerLinkActive="active" mat-icon-button style="color: #FFD648;">
           <mat-icon class="icon-18">settings</mat-icon>
         </a>
-        <a routerLink='org-structure' routerLinkActive="active" mat-icon-button>
+        <a routerLink='org-structure' routerLinkActive="active" mat-icon-button style="color: #FFD648;">
           <mat-icon class="icon-18">language</mat-icon>
         </a>
-        <a (click)="Logout()" mat-icon-button>
+        <a (click)="Logout()" mat-icon-button style="color: red;">
           <mat-icon class="icon-18">exit_to_app</mat-icon>
         </a>
       </div>
     </div>
-    <mat-divider></mat-divider>
+    <!-- <mat-divider></mat-divider> -->
     <div style="overflow-y: auto !important;
-    height: 397px !important;">
+    height: 450px !important;background-color: #FFD648;color: #000000;">
       <mat-nav-list>
         <a mat-list-item routerLink='dashboard' routerLinkActive="active">
-          <span class="pl10">Dashboard</span></a>
+          <span class="pl10" style="color: #000000;font-weight: 500;">Dashboard</span></a>
         <mat-accordion class="example-headers-align">
           <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-            <mat-expansion-panel-header>
+            <mat-expansion-panel-header style="background-color: #FFD648;color: #000000;font-weight: 500;">
               Employee Management
             </mat-expansion-panel-header>
             <mat-nav-list dense>
-              <a mat-list-item routerLink='users' routerLinkActive="active"><mat-icon>lock_person</mat-icon><span class="pl10">User</span></a>
-              <a mat-list-item routerLink='employee' routerLinkActive="active"><mat-icon>supervised_user_circle</mat-icon><span class="pl10">Employee</span></a>
-              <a mat-list-item routerLink='jobs' routerLinkActive="active"><mat-icon>work_history</mat-icon><span class="pl10">Jobs</span></a>
-              <a mat-list-item routerLink='reference' routerLinkActive="active"><mat-icon>spatial_tracking</mat-icon><span class="pl10">Reference</span></a>
-              <a mat-list-item routerLink='candidate' routerLinkActive="active"><mat-icon>spatial_audio</mat-icon><span class="pl10">Candidate</span></a>
+              <a *ngIf="userType=='ADMIN'" mat-list-item routerLink='users' routerLinkActive="active" style="color:#000000"><mat-icon>lock_person</mat-icon><span class="pl10">User</span></a>
+              <a *ngIf="userType=='ADMIN'" mat-list-item routerLink='employee' routerLinkActive="active" style="color:#000000"><mat-icon>supervised_user_circle</mat-icon><span class="pl10">Employee</span></a>
+              <a mat-list-item routerLink='jobs' routerLinkActive="active" style="color:#000000"><mat-icon>work_history</mat-icon><span class="pl10">Jobs</span></a>
+              <a *ngIf="userType=='ADMIN'" mat-list-item routerLink='reference' routerLinkActive="active" style="color:#000000"><mat-icon>spatial_tracking</mat-icon><span class="pl10">Reference</span></a>
+              <a *ngIf="userType=='ADMIN'" mat-list-item routerLink='candidate' routerLinkActive="active" style="color:#000000"><mat-icon>spatial_audio</mat-icon><span class="pl10">Candidate</span></a>
             </mat-nav-list>
           </mat-expansion-panel>
-          <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-            <mat-expansion-panel-header>
+          <mat-expansion-panel *ngIf="userType=='ADMIN'" [class.mat-elevation-z0]="true" dense>
+            <mat-expansion-panel-header style="background-color: #FFD648;color: #000000;font-weight: 500;">
               Invoicing
             </mat-expansion-panel-header>
             <mat-nav-list dense>
-              <a mat-list-item routerLink='client' routerLinkActive="active"><mat-icon>person_search</mat-icon><span class="pl10">Client</span></a>
-              <a mat-list-item routerLink='project' routerLinkActive="active"><mat-icon>shopping_bag</mat-icon><span class="pl10">Project</span></a>
-              <a mat-list-item routerLink='project-assignment' routerLinkActive="active"><mat-icon>fact_check</mat-icon><span class="pl10">Project Assignment</span></a>
-              <a mat-list-item routerLink='invoice-details' routerLinkActive="active"><mat-icon>receipt</mat-icon><span class="pl10">Invoice Details</span></a>
+              <a mat-list-item routerLink='client' routerLinkActive="active" style="color:#000000"><mat-icon>person_search</mat-icon><span class="pl10">Client</span></a>
+              <a mat-list-item routerLink='project' routerLinkActive="active" style="color:#000000"><mat-icon>shopping_bag</mat-icon><span class="pl10">Project</span></a>
+              <a mat-list-item routerLink='project-assignment' routerLinkActive="active" style="color:#000000"><mat-icon>fact_check</mat-icon><span class="pl10">Project Assignment</span></a>
+              <a mat-list-item routerLink='invoice-details' routerLinkActive="active" style="color:#000000"><mat-icon>receipt</mat-icon><span class="pl10">Invoice Details</span></a>
               <!-- <a mat-list-item routerLink='invoice' routerLinkActive="active"><mat-icon>receipt</mat-icon><span class="pl10">Invoice</span></a> -->
             </mat-nav-list>
         </mat-expansion-panel>
           <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-              <mat-expansion-panel-header>
+              <mat-expansion-panel-header style="background-color: #FFD648;color: #000000;font-weight: 500;">
                   Timesheet
               </mat-expansion-panel-header>
               <mat-nav-list dense>
                 <a mat-list-item routerLink='holiday' routerLinkActive="active"><mat-icon>airplane_ticket</mat-icon><span class="pl10">Holiday</span></a>
-                <a mat-list-item routerLink='leave-type' routerLinkActive="active"><mat-icon>title</mat-icon><span class="pl10">Leave Type</span></a>
+                <a *ngIf="userType=='ADMIN'" mat-list-item routerLink='leave-type' routerLinkActive="active"><mat-icon>title</mat-icon><span class="pl10">Leave Type</span></a>
                 <a mat-list-item routerLink='leave' routerLinkActive="active"><mat-icon>airplane_ticket</mat-icon><span class="pl10">Leave</span></a>
-                <a mat-list-item routerLink='timesheet' routerLinkActive="active"><mat-icon>calendar_month</mat-icon><span class="pl10">Timesheet</span></a>
-                <a mat-list-item routerLink='timesheet-detail' routerLinkActive="active"><mat-icon>edit_calendar</mat-icon><span class="pl10">Timesheet Detail</span></a>
-                <a mat-list-item routerLink='timesheet-approval' routerLinkActive="active"><mat-icon>notification_important</mat-icon><span class="pl10">Timesheet Approval</span></a>
+                <!-- <a mat-list-item routerLink='timesheet' routerLinkActive="active"><mat-icon>calendar_month</mat-icon><span class="pl10">Timesheet</span></a> -->
+                <!-- <a mat-list-item routerLink='timesheet-detail' routerLinkActive="active"><mat-icon>edit_calendar</mat-icon><span class="pl10">Timesheet Detail</span></a> -->
+                <a mat-list-item routerLink='timesheet-list' routerLinkActive="active"><mat-icon>notification_important</mat-icon><span class="pl10">Timesheet</span></a>
               </mat-nav-list>
           </mat-expansion-panel>
-          <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
-            <mat-expansion-panel-header>
+          <mat-expansion-panel *ngIf="userType=='ADMIN'" [class.mat-elevation-z0]="true" dense>
+            <mat-expansion-panel-header style="background-color: #FFD648;color: #000000;font-weight: 500;">
                 Inventory
             </mat-expansion-panel-header>
             <mat-nav-list dense>
-              <a mat-list-item routerLink='asset-type' routerLinkActive="active"><mat-icon>bookmark</mat-icon><span class="pl10">Asset Type</span></a>
-              <a mat-list-item routerLink='asset' routerLinkActive="active"><mat-icon>card_giftcard</mat-icon><span class="pl10">Asset</span></a>
-              <a mat-list-item routerLink='asset-allocation' routerLinkActive="active"><mat-icon>assignment_return</mat-icon><span class="pl10">Asset Allocation</span></a>
+              <a mat-list-item routerLink='asset-type' routerLinkActive="active" style="color:#000000"><mat-icon>bookmark</mat-icon><span class="pl10">Asset Type</span></a>
+              <a mat-list-item routerLink='asset' routerLinkActive="active" style="color:#000000"><mat-icon>card_giftcard</mat-icon><span class="pl10">Asset</span></a>
+              <a mat-list-item routerLink='asset-allocation' routerLinkActive="active" style="color:#000000"><mat-icon>assignment_return</mat-icon><span class="pl10">Asset Allocation</span></a>
             </mat-nav-list>
         </mat-expansion-panel>
       </mat-accordion>
@@ -95,18 +90,22 @@
         (click)="drawer.toggle()"
 
         >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon aria-label="Side nav toggle icon" style="height: 24px !important;
+        width: 24px !important;
+        font-size: 40px !important;">menu</mat-icon>
       </button>
-      <span>{{companyName}}</span>
+      <img src="../../../assets/blueverse_logo_white_yellow_live.png" alt="avatar" width="40" />
+      <span style="color:#FFD648;font-family: Georgia ;font-size: 25px;">{{companyName}}</span>
+      <mat-icon style="    height: 30px !important;
+      width: 28px !important;
+      font-size: 32px !important;">keyboard_arrow_right</mat-icon>
+      <div style="color:white;font-family: Georgia ;">
+        {{ count$ | async }}</div>
       <span class="fill-remaining-space"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-      </button>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
-      </button>
+      <span style="color:#FFD648;font-family: Arial, Helvetica, sans-serif ;font-size: 25px;">{{ user.employee }}</span>
+
       <mat-menu #appMenu="matMenu">
-        <button mat-menu-item routerLink='settings' routerLinkActive="active">Global Settings</button>
+        <button mat-menu-item routerLink='settings' routerLinkActive="active" >Global Settings</button>
         <button mat-menu-item routerLink='profile' routerLinkActive="active">Profile</button>
         <button mat-menu-item (click)="Logout()">
           Logout
@@ -114,7 +113,9 @@
       </mat-menu>
 
       <button mat-icon-button [matMenuTriggerFor]="appMenu">
-        <mat-icon>more_vert</mat-icon>
+        <mat-icon style="    height: 30px !important;
+        width: 28px !important;
+        font-size: 32px !important;">more_vert</mat-icon>
       </button>
     </mat-toolbar>
     <router-outlet></router-outlet>

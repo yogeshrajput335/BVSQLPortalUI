@@ -1,6 +1,6 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Holiday } from '../../models/Holiday';
 import { HolidayDataService } from '../../services/holiday-data.service';
 
@@ -11,16 +11,15 @@ import { HolidayDataService } from '../../services/holiday-data.service';
 })
 
 export class AddHolidayDialogComponent {
-  statuses:any
+  statuses: any
   constructor(public dialogRef: MatDialogRef<AddHolidayDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: Holiday,
-              public dataService: HolidayDataService) {
-                this.statuses = this.dataService.getStatues()
-              }
+    @Inject(MAT_DIALOG_DATA) public data: Holiday,
+    public dataService: HolidayDataService) {
+    this.statuses = this.dataService.getStatues()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -30,7 +29,7 @@ export class AddHolidayDialogComponent {
   }
 
   submit() {
-  // empty stuff
+    
   }
 
   onNoClick(): void {

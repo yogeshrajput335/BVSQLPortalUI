@@ -2,7 +2,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {Component, Inject} from '@angular/core';
 import {ReferenceDataService} from '../../services/reference-data.service';
 
-
 @Component({
   selector: 'app-delete-reference.dialog',
   templateUrl: '../../dialogs/delete/delete-reference.dialog.html',

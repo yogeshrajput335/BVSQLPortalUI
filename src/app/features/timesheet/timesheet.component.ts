@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
+import { increment } from 'src/app/core/store/counter.actions';
+import { Store } from '@ngrx/store';
+
 
 @Component({
   selector: 'app-timesheet',
@@ -12,7 +14,10 @@ export class TimesheetComponent implements OnInit {
 
   today = new Date();
 
-  constructor() { }
+  constructor(
+    private store: Store ) {
+      this.store.dispatch(increment({message:"Timesheet"}));
+     }
 
   ngOnInit(): void {
   }

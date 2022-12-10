@@ -1,54 +1,41 @@
+<button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn" class="cancelBtn">X</button>
 <div class="container">
-  <!-- <h3 mat-dialog-title>Issue id: {{data.id}}</h3> -->
 
   <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
-    <!-- <div class="form">
-      <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="Id" [(ngModel)]="data.id" name="id" required >
+    <div class="example-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Client Name</mat-label>
+        <textarea matInput #input class="form-control" placeholder="Client Name" [(ngModel)]="data.clientName"
+          name="clientName" required></textarea>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div> -->
 
-    <!--Textarea for demo purposes-->
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="Client Name" [(ngModel)]="data.clientName" name="clientName" required />
+      <mat-form-field appearance="outline">
+        <mat-label>Contact Person</mat-label>
+        <input matInput #inputstate class="form-control" placeholder="Contact Person" [(ngModel)]="data.contactPerson"
+          name="contactPerson" maxlength="10" required>
         <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
-    </div>
 
-    <!--Contains mat-hint for characters count and has maxLengt set-->
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput #inputstate class="form-control" placeholder="Contact Person" [(ngModel)]="data.contactPerson" name="contactPerson" maxlength="10" required >
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-        <!-- <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint> -->
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" [(ngModel)]="data.email" name="email">
       </mat-form-field>
-    </div>
 
-    <div class="form">
-        <mat-form-field color="accent">
-          <input matInput placeholder="Email" [(ngModel)]="data.email" name="email">
-        </mat-form-field>
-    </div>
-
-    <div class="form">
-      <mat-form-field color="accent">
+      <mat-form-field appearance="outline">
+        <mat-label>Phone Number</mat-label>
         <input matInput placeholder="Phone Number" [(ngModel)]="data.phoneNumber" name="phoneNumber">
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent">
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
         <input matInput placeholder="Address" [(ngModel)]="data.address" name="address">
       </mat-form-field>
-    </div>
 
-    <div class="form">
-      <mat-form-field color="accent">
+      <mat-form-field appearance="outline">
         <mat-label>Status</mat-label>
-        <mat-select [(ngModel)]="data.status" name="status"  color="accent" >
+        <mat-select [(ngModel)]="data.status" name="status" color="accent">
           <mat-option *ngFor="let s of statuses" [value]="s">
             {{s}}
           </mat-option>
@@ -57,8 +44,8 @@
     </div>
 
     <div mat-dialog-actions>
-      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="stopEdit()">Save</button>
-      <button mat-raised-button (click)="onNoClick()" tabindex="-1" color="warn">Cancel</button>
+      <button mat-raised-button type="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1"
+        (click)="stopEdit()">Save</button>
     </div>
   </form>
 </div>

@@ -1,7 +1,7 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Component, Inject} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import {AssetType} from '../../models/AssetType';
+import { Component, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
+import { AssetType } from '../../models/AssetType';
 import { AssetTypeDataService } from '../../services/asset-type-data.service';
 
 @Component({
@@ -11,17 +11,16 @@ import { AssetTypeDataService } from '../../services/asset-type-data.service';
 })
 
 export class AddAssetTypeDialogComponent {
-  statuses:any
-  assetTypes:any
+  statuses: any
+  assetTypes: any
   constructor(public dialogRef: MatDialogRef<AddAssetTypeDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: AssetType,
-              public dataService: AssetTypeDataService) {
-                this.statuses = this.dataService.getStatues()
-               }
+    @Inject(MAT_DIALOG_DATA) public data: AssetType,
+    public dataService: AssetTypeDataService) {
+    this.statuses = this.dataService.getStatues()
+  }
 
   formControl = new FormControl('', [
     Validators.required
-    // Validators.email,
   ]);
 
   getErrorMessage() {
@@ -31,7 +30,7 @@ export class AddAssetTypeDialogComponent {
   }
 
   submit() {
-  // empty stuff
+    
   }
 
   onNoClick(): void {
